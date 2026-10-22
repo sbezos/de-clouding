@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
   {{ $icon := resources.Get "img/favicon.svg" | fingerprint }}
   <link rel="icon" type="image/svg+xml" href="{{ $icon.RelPermalink }}">
+  {{ block "head" . }}{{ end }}
 </head>
 <body class="{{ if .IsHome }}home{{ end }}">
 <div class="sky"></div>

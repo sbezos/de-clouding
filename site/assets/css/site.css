@@ -19,7 +19,7 @@
   :root {
     --bg: #101a1d;
     --sky: #152a35;
-    --cloud: #1e3139;
+    --cloud: #2b4652;
     --fg: #e6edef;
     --muted: #9fb0b6;
     --brand: #5fc1b4;
@@ -83,6 +83,7 @@ main { padding-top: 1.5rem; padding-bottom: 3rem; }
 @media (max-width: 40rem) { .hero-art { max-width: 13rem; } .hero { gap: .25rem; } }
 .hero-copy h1 { font-size: clamp(2rem, 5.5vw, 2.8rem); }
 .lede { font-size: 1.15rem; color: var(--muted); margin-top: .4rem; line-height: 1.5; }
+.hero-play { color: var(--muted); font-size: .95rem; margin-top: .9rem; }
 .cta { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.4rem; }
 .button { display: inline-block; background: var(--brand); color: #fff; text-decoration: none; padding: .7rem 1.2rem; border-radius: 999px; font-weight: 700; font-size: .98rem; border: 2px solid var(--brand); }
 .button:hover { background: var(--brand-hover); border-color: var(--brand-hover); color: #fff; }
