@@ -96,3 +96,7 @@ button.copy:disabled { opacity: .7; cursor: default; }
 .builder label { display: inline-flex; align-items: center; gap: .4rem; margin: .25rem 1rem .25rem 0; font-family: system-ui, sans-serif; font-size: .95rem; }
 .builder textarea { width: 100%; min-height: 16rem; padding: .9rem; border: 1px solid var(--line); border-radius: 8px; background: var(--code-bg); color: var(--fg); resize: vertical; }
 .builder .prompt-head { margin-top: 1.5rem; }
+
+/* Tables: keep the label column on one line; let the others wrap. */
+table th:first-child, table td:first-child { white-space: nowrap; }
+@media (max-width: 36rem) { table { display: block; overflow-x: auto; } }
