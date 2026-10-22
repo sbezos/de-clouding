@@ -1,0 +1,16 @@
+# ~/.config/systemd/user/comfyui.service — ComfyUI on torch.xpu, Intel Arc, Ubuntu guest.
+# systemctl --user enable --now comfyui ; loginctl enable-linger $USER so it starts at boot.
+# TODO (Sal): confirm WorkingDirectory / ExecStart flags against the live unit.
+[Unit]
+Description=ComfyUI (torch.xpu)
+After=network-online.target
+
+[Service]
+WorkingDirectory=%h/ComfyUI
+Environment=TMPDIR=%h/tmp
+ExecStart=%h/venv-xpu/bin/python main.py --listen 0.0.0.0 --port 8188
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

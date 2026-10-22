@@ -19,4 +19,4 @@
   {{ end }}
 </article>
 {{ end }}
-{{ define "scripts" }}{{ with .Params.script }}<script src="{{ . | relURL }}" defer></script>{{ end }}{{ end }}
+{{ define "scripts" }}{{ with .Params.script }}{{ $js := resources.Get . | minify | fingerprint }}<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>{{ end }}{{ end }}

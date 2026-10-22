@@ -27,6 +27,10 @@ disableKinds = ["taxonomy", "term"]
     pageRef = "/stack"
     weight = 40
   [[menus.main]]
+    name = "Lab notes"
+    pageRef = "/notes"
+    weight = 45
+  [[menus.main]]
     name = "Why"
     pageRef = "/why"
     weight = 50

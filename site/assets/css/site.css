@@ -98,5 +98,5 @@ button.copy:disabled { opacity: .7; cursor: default; }
 .builder .prompt-head { margin-top: 1.5rem; }
 
 /* Tables: keep the label column on one line; let the others wrap. */
-table th:first-child, table td:first-child { white-space: nowrap; }
+table th:first-child, table td:first-child { white-space: nowrap; width: 1%; padding-right: 1.2rem; }
 @media (max-width: 36rem) { table { display: block; overflow-x: auto; } }
