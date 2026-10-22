@@ -1,7 +1,7 @@
 ---
 title: "Backups"
 weight: 10
-eyebrow: "Guide 1 · Do this first"
+eyebrow: "Guide 1 — do this first"
 replaces: "trusting the cloud to never lose it"
 description: "Once your data lives in your house, losing it is your problem. Make that a solved problem before moving anything else."
 moves: ["Data"]

@@ -2,9 +2,9 @@
 <div class="tier-strip">
   <h2 id="at-each-tier">What this looks like at each budget</h2>
   <dl>
-    <dt><a href="{{ "/tiers/#tier-0" | relURL }}">Tier 0 · $0</a></dt><dd>{{ .Get "t0" }}</dd>
-    <dt><a href="{{ "/tiers/#tier-1" | relURL }}">Tier 1 · one small box</a></dt><dd>{{ .Get "t1" }}</dd>
-    <dt><a href="{{ "/tiers/#tier-2" | relURL }}">Tier 2 · a real home server</a></dt><dd>{{ .Get "t2" }}</dd>
-    <dt><a href="{{ "/tiers/#tier-3" | relURL }}">Tier 3 · the hobby got serious</a></dt><dd>{{ .Get "t3" }}</dd>
+    <dt><a href="{{ "/tiers/#tier-0" | relURL }}">Tier 0, $0</a></dt><dd>{{ .Get "t0" | markdownify }}</dd>
+    <dt><a href="{{ "/tiers/#tier-1" | relURL }}">Tier 1, one small box</a></dt><dd>{{ .Get "t1" | markdownify }}</dd>
+    <dt><a href="{{ "/tiers/#tier-2" | relURL }}">Tier 2, a real home server</a></dt><dd>{{ .Get "t2" | markdownify }}</dd>
+    <dt><a href="{{ "/tiers/#tier-3" | relURL }}">Tier 3, the hobby got serious</a></dt><dd>{{ .Get "t3" | markdownify }}</dd>
   </dl>
 </div>

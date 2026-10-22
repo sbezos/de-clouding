@@ -1,7 +1,7 @@
 ---
 title: "Your own AI assistant"
 weight: 90
-eyebrow: "Guide 9 · The centerpiece"
+eyebrow: "Guide 9 — the centerpiece"
 replaces: "a monthly chatbot subscription that reads everything you tell it"
 description: "The models were built from everyone's data. The open ones are yours to run — on a laptop today, on something bigger if you want."
 moves: ["Data", "Model", "Compute"]

@@ -1,7 +1,7 @@
 ---
 title: "Intel Arc in a Proxmox VM: no Resizable BAR, no oneAPI"
 weight: 10
-eyebrow: "Lab note · GPU passthrough"
+eyebrow: "Lab note: GPU passthrough"
 description: "An Arc Pro B-series card passed through to a VM on a server whose BIOS has no ReBAR option. Vulkan worked; Level Zero, oneAPI and torch.xpu refused to initialize. The fix is a sysfs write on the host — and a hookscript to make it survive reboots."
 tags: ["proxmox", "intel-arc", "battlemage", "pcie-passthrough", "oneapi"]
 ---

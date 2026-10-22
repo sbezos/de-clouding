@@ -1,7 +1,7 @@
 ---
 title: "PyTorch on Intel Arc (torch.xpu) inside a VM, and ComfyUI on top"
 weight: 20
-eyebrow: "Lab note · Intel compute stack"
+eyebrow: "Lab note: Intel compute stack"
 description: "Once the BAR problem is solved, getting a working torch.xpu environment on Battlemage in an Ubuntu VM — and running ComfyUI as a service on it — is mostly a matter of picking versions that agree with each other."
 tags: ["intel-arc", "pytorch", "xpu", "oneapi", "comfyui", "ubuntu"]
 ---
