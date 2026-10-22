@@ -1,16 +1,20 @@
-# ~/.config/systemd/user/comfyui.service — ComfyUI on torch.xpu, Intel Arc, Ubuntu guest.
-# systemctl --user enable --now comfyui ; loginctl enable-linger $USER so it starts at boot.
-# TODO (Sal): confirm WorkingDirectory / ExecStart flags against the live unit.
+# /etc/systemd/system/comfyui.service — ComfyUI on torch 2.14.1+xpu, Intel Arc Pro B65 CT, Ubuntu 26.04 guest.
+# Replace <user>. Then: systemctl daemon-reload && systemctl enable --now comfyui
 [Unit]
-Description=ComfyUI (torch.xpu)
-After=network-online.target
+Description=ComfyUI (torch 2.14.1+xpu) on Arc Pro B65 CT
+After=network-online.target remote-fs.target
+Wants=network-online.target
 
 [Service]
-WorkingDirectory=%h/ComfyUI
-Environment=TMPDIR=%h/tmp
-ExecStart=%h/venv-xpu/bin/python main.py --listen 0.0.0.0 --port 8188
+User=<user>
+WorkingDirectory=/home/<user>/ComfyUI
+Environment=HOME=/home/<user>
+Environment=SYCL_CACHE_PERSISTENT=1
+LimitCORE=0
+ExecStart=/home/<user>/venv-xpu/bin/python main.py --listen 0.0.0.0 --port 8188 --disable-smart-memory --reserve-vram 2
 Restart=on-failure
-RestartSec=5
+RestartSec=15
+TimeoutStopSec=60
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target

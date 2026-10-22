@@ -1,0 +1,19 @@
+# Known-good combination, Oct 2026. Ubuntu 26.04 guest (kernel 7.0), Arc Pro B65 CT (Battlemage G31) via vfio passthrough, BAR2 = 32 GiB.
+
+## venv (pip freeze, relevant lines) — the +xpu wheels pull the Intel runtime in as pip packages
+torch==2.14.1+xpu
+torchvision==0.29.1+xpu
+torchaudio==2.11.0+xpu
+intel-sycl-rt==2026.1.0
+intel-opencl-rt==2026.1.0
+intel-cmplr-lib-rt==2026.1.0
+intel-cmplr-lib-ur==2026.1.0
+intel-cmplr-lic-rt==2026.1.0
+intel-openmp==2026.1.0
+intel-pti==1.0.1
+
+## guest apt packages (dpkg -l); the two marked 'hold' are pinned
+libze1                1.28.2-2          oneAPI Level Zero loader           hold
+libze-intel-gpu1      26.05.37020.3-1   Level Zero driver for Intel GPUs   hold
+libze-dev             1.28.2-2
+intel-opencl-icd      26.05.37020.3-1

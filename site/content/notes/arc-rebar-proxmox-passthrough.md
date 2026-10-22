@@ -49,7 +49,7 @@ The resize is lost on every host reboot, and a VM start with vfio already bound 
 2. Put the script at `/var/lib/vz/snippets/rebar-vm200.sh` (see [`lab/proxmox/rebar-hookscript.sh`](https://github.com/sbezos/de-clouding/blob/main/lab/proxmox/rebar-hookscript.sh)), `chmod +x` it.
 3. Attach it: `qm set 200 --hookscript local:snippets/rebar-vm200.sh`.
 
-Verified across a full host reboot: BAR2 came up at 32 G in the guest with no manual step.
+The script checks the current BAR size first and exits quietly if it's already 32 G, unbinds whatever driver holds the card, resizes, sets `driver_override` to `vfio-pci` and rebinds — and **refuses to start the VM** if the resize fails, so you never silently boot into the 256 MB state again. Verified across a full host reboot: BAR2 came up at 32 G in the guest with no manual step.
 
 ## Gotchas
 
