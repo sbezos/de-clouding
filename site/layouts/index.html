@@ -1,0 +1,21 @@
+{{ define "main" }}
+<section class="hero">
+  <h1>Your data built the cloud.<br>Take some of it back.</h1>
+  <p class="lede">A plain-language guide to moving your photos, files, mail, home, and even your AI assistant onto things you control — at whatever budget you have, including zero.</p>
+  <p class="cta">
+    <a class="button" href="{{ "/start/" | relURL }}">Start here</a>
+    <a class="button ghost" href="{{ "/guides/" | relURL }}">Browse the guides</a>
+  </p>
+</section>
+
+{{ .Content }}
+
+<section class="grid">
+  {{ range (where site.RegularPages "Section" "guides").ByWeight }}
+  <a class="card" href="{{ .RelPermalink }}">
+    <strong>{{ .Title }}</strong>
+    {{ with .Params.replaces }}<small>instead of {{ . }}</small>{{ end }}
+  </a>
+  {{ end }}
+</section>
+{{ end }}

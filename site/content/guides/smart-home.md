@@ -1,0 +1,38 @@
+---
+title: "Smart home & voice"
+weight: 50
+eyebrow: "Guide 5"
+replaces: "Alexa, Google Home, SmartThings, a dozen vendor apps"
+description: "Keep the speakers and bulbs. Replace the brain."
+moves: ["Data", "Compute", "Network"]
+---
+
+## What you gain
+
+Right now every light switch, thermostat reading and "turn off the kitchen" goes to a company's servers and comes back. That's a detailed log of when you're home, awake, and asleep — and when the company drops the product or changes the terms, your house gets dumber.
+
+**Home Assistant** is free software that becomes the brain of the house instead. It talks to thousands of devices directly, runs on a small box in a closet, and keeps the history in your house. It's the most mature project on this site and has a huge, friendly community.
+
+## You can keep the hardware
+
+The usual worry is "do I have to throw out my smart speakers?" No:
+
+- Most **bulbs, plugs, sensors, and thermostats** work with Home Assistant directly, many of them with their cloud account turned off. Devices using Zigbee, Z-Wave, Thread/Matter, or plain Wi-Fi with local control are the ones to prefer when you buy new.
+- **Voice assistants** are the hard case. Home Assistant has its own voice pipeline that can run fully local (with its own inexpensive voice hardware, or any microphone), and it can use your local AI model to understand natural requests. If you want to keep using existing smart speakers, they can be linked to Home Assistant so the speaker becomes a microphone and the decisions happen at home — the vendor still hears the command, but your house's state and history stay yours.
+
+## What you still rent
+
+Possibly nothing. If you keep vendor speakers, you keep that vendor's voice service for the listening part only. Some devices (certain thermostats, locks, robot vacuums) only work via their cloud — Home Assistant's device list tells you which before you buy.
+
+{{< tiers
+  t0="Install Home Assistant on an old laptop or in a virtual machine on your computer to try it. Start turning off cloud features on devices that support local control."
+  t1="This is tier 1's natural home: a Raspberry Pi or mini PC running Home Assistant 24/7, plus a $30 Zigbee/Z-Wave USB stick to free devices from their hubs."
+  t2="Add fully local voice (Home Assistant's voice hardware or satellites) and let your local AI model handle natural-language requests."
+  t3="Everything local, including camera-based presence and a conversational assistant that knows the house."
+>}}
+
+{{< prompt >}}
+I want my smart home to work without depending on [Alexa / Google Home / vendor apps]. Devices I have: [list bulbs, plugs, thermostats, speakers, locks, cameras, hubs — brands and models if you know them]. Budget tier: [0 / 1 / 2 / 3 — see de-clouding.com/tiers]. Comfort: [none / some / fluent]. I [want / don't need] to keep using voice commands.
+
+Tell me which of my devices can run locally with Home Assistant, which need their cloud, and which I might eventually replace. Recommend hardware to run Home Assistant on at my tier (check current availability and prices). Then set it up with me one step at a time, waiting for confirmation at each step: install, add devices one by one, recreate my most-used automations, and only then turn off the old hub's control so I have a fallback the whole way. Never expose Home Assistant directly to the internet; if I need remote access, use a VPN-style tool. Tell me before anything hard to undo, including factory-resetting any device.
+{{< /prompt >}}

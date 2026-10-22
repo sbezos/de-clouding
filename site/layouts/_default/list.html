@@ -1,0 +1,18 @@
+{{ define "main" }}
+<article class="page">
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+  </header>
+  {{ .Content }}
+  <ol class="guide-list">
+    {{ range .Pages.ByWeight }}
+    <li>
+      <a href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong></a>
+      {{ with .Params.replaces }}<span class="replaces">replaces {{ . }}</span>{{ end }}
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </li>
+    {{ end }}
+  </ol>
+</article>
+{{ end }}

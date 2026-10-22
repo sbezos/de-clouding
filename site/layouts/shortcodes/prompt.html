@@ -1,0 +1,9 @@
+{{- /* Usage: {{< prompt title="Hand it to Claude" >}} ...prompt text... {{< /prompt >}} */ -}}
+<section class="prompt-box">
+  <div class="prompt-head">
+    <h2 id="hand-it-off">{{ with .Get "title" }}{{ . }}{{ else }}Hand it to Claude{{ end }}</h2>
+    <button class="copy" type="button" data-copy-target="#prompt-{{ .Ordinal }}">Copy prompt</button>
+  </div>
+  <p class="prompt-help">Fill in the brackets, paste the whole thing into Claude (or any assistant you trust), and let it walk you through the rest one step at a time.</p>
+  <pre id="prompt-{{ .Ordinal }}" class="prompt">{{ trim .Inner "\n" }}</pre>
+</section>

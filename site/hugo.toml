@@ -1,0 +1,46 @@
+baseURL = "https://de-clouding.com/"
+languageCode = "en-us"
+title = "De-clouding"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  description = "Take your data back from the cloud, one service at a time — at whatever budget you have."
+  # Shown on the About page; edit freely.
+  author = "Sal"
+
+[menus]
+  [[menus.main]]
+    name = "Start here"
+    pageRef = "/start"
+    weight = 10
+  [[menus.main]]
+    name = "Guides"
+    pageRef = "/guides"
+    weight = 20
+  [[menus.main]]
+    name = "Budget tiers"
+    pageRef = "/tiers"
+    weight = 30
+  [[menus.main]]
+    name = "Own the stack"
+    pageRef = "/stack"
+    weight = 40
+  [[menus.main]]
+    name = "Why"
+    pageRef = "/why"
+    weight = 50
+  [[menus.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 60
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 2
+
+[minify]
+  minifyOutput = true

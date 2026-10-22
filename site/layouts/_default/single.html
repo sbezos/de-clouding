@@ -1,0 +1,22 @@
+{{ define "main" }}
+<article class="page">
+  <header class="page-header">
+    {{ with .Params.eyebrow }}<p class="eyebrow">{{ . }}</p>{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+  </header>
+  {{ if .Params.moves }}
+  <p class="moves"><span>Layers this moves to you:</span>
+    {{ range .Params.moves }}<span class="chip">{{ . }}</span>{{ end }}
+  </p>
+  {{ end }}
+  {{ .Content }}
+  {{ if and .Section (eq .Section "guides") }}
+  <nav class="pager">
+    {{ with .PrevInSection }}<a href="{{ .RelPermalink }}">&larr; {{ .Title }}</a>{{ else }}<span></span>{{ end }}
+    {{ with .NextInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} &rarr;</a>{{ end }}
+  </nav>
+  {{ end }}
+</article>
+{{ end }}
+{{ define "scripts" }}{{ with .Params.script }}<script src="{{ . | relURL }}" defer></script>{{ end }}{{ end }}
