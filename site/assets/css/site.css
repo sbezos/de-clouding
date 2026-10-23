@@ -186,3 +186,24 @@ html[data-depth="deep"] .depth-switch { border-color: color-mix(in srgb, var(--b
 html[data-depth="deep"] .eyebrow::before { content: "▣ "; font-size: .75em; }
 html[data-depth="deep"] .depth-label::before { content: "▣ "; }
 html[data-depth="deep"] .site-footer { border-top-style: dashed; }
+
+/* My box launcher */
+.mb-form { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.1rem; margin: 1rem 0; }
+.mb-field { display: block; margin-bottom: .8rem; }
+.mb-field span { display: block; font-weight: 700; font-size: .92rem; margin-bottom: .3rem; }
+.mb-field input { width: 100%; padding: .6rem .7rem; font: inherit; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--fg); }
+.mb-mode, .mb-on { border: 1px solid var(--line); border-radius: 10px; padding: .6rem .9rem .7rem; margin: .6rem 0; }
+.mb-mode legend, .mb-on legend { font-weight: 700; font-size: .88rem; padding: 0 .3rem; }
+.mb-mode label, .mb-on label { display: inline-flex; align-items: center; gap: .4rem; margin: .25rem 1rem .25rem 0; font-size: .95rem; }
+.mb-on input, .mb-mode input { accent-color: var(--brand); }
+.mb-actions { margin: .8rem 0 0; display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+.mb-actions .copy { font: 700 .98rem var(--font); padding: .7rem 1.2rem; }
+.mb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: .8rem; margin: 1.2rem 0 .6rem; }
+.mb-card { position: relative; padding-right: 2rem; }
+.mb-card small { word-break: break-all; }
+.mb-card code { display: block; margin-top: .3rem; font-size: .85rem; }
+.mb-dot { position: absolute; top: .9rem; right: .9rem; width: .7rem; height: .7rem; border-radius: 50%; background: var(--line); }
+.mb-dot.ok { background: #2e9e6b; box-shadow: 0 0 8px rgba(46,158,107,.6); }
+.mb-dot.bad { background: #c9553d; }
+.mb-warn { color: #a33a1f; }
+.mb-note { color: var(--muted); font-size: .92rem; }

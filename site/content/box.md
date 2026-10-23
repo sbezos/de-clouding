@@ -68,12 +68,13 @@ docker compose up -d
 Tailscale can hand out real HTTPS addresses for things running on the box, visible only to your own devices. In the Tailscale admin console turn on **MagicDNS** and **HTTPS certificates** (DNS page), then on the box:
 
 ```
-sudo tailscale serve --bg --https=8443 8080     # passwords
-sudo tailscale serve --bg --https=2443 2283     # photos
+sudo tailscale serve --bg --https=18080 8080    # passwords  (rule: HTTPS port = app port + 10000)
+sudo tailscale serve --bg --https=12283 2283    # photos
+sudo tailscale serve --bg --https=19898 9898    # backups
 sudo tailscale serve status                     # shows the https://box.<your-tailnet>.ts.net:PORT addresses
 ```
 
-Use those `https://…ts.net` addresses in the phone apps. Nothing is reachable from the open internet; the router stays closed.
+The "+10000" rule is just a convention so every address can be worked out from the box's name — the [My box](/my-box/) page uses it to turn one hostname into links to everything. Repeat the pattern for any other kit you want over HTTPS. Use those `https://…ts.net` addresses in the phone apps. Nothing is reachable from the open internet; the router stays closed.
 
 ## 5. Hand the rest to Claude
 
@@ -84,6 +85,8 @@ Walk me through the remaining kits one at a time, waiting for me to paste the ou
 {{< /prompt >}}
 
 ---
+
+Once it's running, [My box](/my-box/) turns the box's name into a page of links to all of it — from this site, with nothing stored here.
 
 Everything here is one file per service on purpose: no installer, no magic, nothing that can break all at once. If a kit stops working because a project changed its compose format, [open an issue](https://github.com/sbezos/de-clouding/issues) and it gets fixed for everyone.
 

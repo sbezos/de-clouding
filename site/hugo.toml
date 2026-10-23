@@ -27,6 +27,10 @@ disableKinds = ["taxonomy", "term"]
     pageRef = "/box"
     weight = 25
   [[menus.main]]
+    name = "My box"
+    pageRef = "/my-box"
+    weight = 27
+  [[menus.main]]
     name = "Budget tiers"
     pageRef = "/tiers"
     weight = 30

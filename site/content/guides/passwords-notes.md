@@ -48,7 +48,7 @@ Nothing, unless you choose a hosted encrypted tier for convenience — which is 
 **A scheduled, encrypted export of the vault** — the one thing even a self-hosted vault needs, because a corrupted database and a perfect backup of it are the same thing. The Bitwarden CLI works against Vaultwarden:
 
 ```
-bw config server https://box.your-tailnet.ts.net:8443
+bw config server https://box.your-tailnet.ts.net:18080
 bw login you@yourdomain.com
 export BW_SESSION=$(bw unlock --raw)
 bw export --format encrypted_json --password "$(cat ~/.bw-export-pass)" --output ~/vault-exports/$(date +%F).json
