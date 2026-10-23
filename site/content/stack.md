@@ -23,4 +23,6 @@ See the [budget tiers](/tiers/) for what each one costs and buys. Every guide on
 
 ## What you'll still rent — and why that's fine
 
-Some things are better done by someone else. Delivering email reliably. Keeping an off-site copy of your backups. Holding your domain name. The test isn't "did I avoid every company" — it's **can they read it, and can I leave?** If the data is encrypted on your side and you can take it with you in an afternoon, you own the stack even when a server you don't own is in the loop.
+Some things are better done by someone else. Delivering email reliably. Keeping an off-site copy of your backups. Holding your domain name. The test isn't "did I avoid every company" — it's **can they read it, and can I leave?**
+
+The same files, two very different places: documents living in a Google Drive can be read, indexed and learned from. The same documents in an encrypted volume on AWS are held by a company that can't open them and that you can replace tomorrow. Both are "the cloud." Only one of them owns you. If the data is encrypted on your side and you can take it with you in an afternoon, you own the stack even when a server you don't own is in the loop.

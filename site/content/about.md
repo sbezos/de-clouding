@@ -4,6 +4,12 @@ title: "About"
 
 I'm Sal. I'm an electrical engineer by training and a patent attorney by trade, and I run a home lab because I like knowing where my data sleeps at night. Over a couple of years I moved my photos, files, mail, smart home, cameras, TV, and finally my AI assistant onto hardware I control. The hardest part wasn't the technology; it was figuring out what was *possible* and in what order. This site is the map I wish I'd had.
 
+## About the name
+
+Yes: Jeff Bezos is my first cousin. I know how that reads on a site called de-clouding, and I'm fine with it, because this is the same advice I give inventors in my day job. **If your data has value, protect it at all costs.** AI is remarkable, but what makes it valuable is access to unique data. Control the access and you control the space.
+
+That doesn't mean leaving the cloud. It means deciding what's on it. There is a world of difference between your documents living in a Google Drive and your documents sitting in an encrypted volume on AWS. One can be read, indexed and learned from. The other is yours — held by someone who can't open it, and who can be swapped out tomorrow. This site is hosted on AWS. Nothing of yours passes through it. I don't do any work for Amazon.
+
 A few commitments:
 
 - **No ads, no affiliate links, no analytics.** If that ever changes it will say so on every page.
