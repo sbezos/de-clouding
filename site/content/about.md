@@ -17,7 +17,7 @@ A few commitments:
 - **Every tier counts.** Changing your email provider is de-clouding. Nobody needs a server rack to belong here.
 - **Facts, not villains.** The guides describe what services *can* do with your data, based on their own terms, and let you decide how you feel about it.
 - **Corrections welcome.** If a guide is wrong or out of date, the text is CC BY-SA — fix it and tell me.
-- **Funded by nobody, by default.** If the site saved you an afternoon, [GitHub Sponsors](https://github.com/sponsors/sbezos) is the one place to chip in. No paywall, no members-only pages, no sponsor logos; nothing changes if you don't.
+- **Nothing to pay for, ever.** If the site saved you an afternoon, pay it forward instead: give to the [Legal Aid Justice Center](https://www.justice4all.org/), the [ACLU of Virginia](https://www.acluva.org/), or the [National Center for Youth Law](https://youthlaw.org/) — three organizations defending people with far less control over their lives than any of us has over our data. (Disclosure: I serve on the Legal Aid Justice Center's board. The other two I simply admire.) This site takes nothing.
 
 This site is a handful of static files served from a content delivery network. There is no server-side code, no database, and no form that submits anywhere. The prompt builder runs entirely in your browser. Yes, the files are hosted on a big cloud provider; what matters is that nothing of *yours* passes through it.
 
