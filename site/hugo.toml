@@ -23,13 +23,13 @@ disableKinds = ["taxonomy", "term"]
     pageRef = "/guides"
     weight = 20
   [[menus.main]]
+    name = "Build a box"
+    pageRef = "/box"
+    weight = 25
+  [[menus.main]]
     name = "Budget tiers"
     pageRef = "/tiers"
     weight = 30
-  [[menus.main]]
-    name = "Own the stack"
-    pageRef = "/stack"
-    weight = 40
   [[menus.main]]
     name = "Lab notes"
     pageRef = "/notes"

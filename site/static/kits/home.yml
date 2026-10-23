@@ -1,0 +1,14 @@
+# de-clouding.com kit: smart home brain (Home Assistant, container flavor)
+# For the long run, Home Assistant OS on its own device is the nicer experience; this gets you started.
+services:
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    restart: unless-stopped
+    privileged: true            # lets it see a Zigbee/Z-Wave USB stick
+    network_mode: host          # lets it discover devices on your network
+    environment:
+      - TZ=America/New_York     # change to your time zone
+    volumes:
+      - ./homeassistant:/config
+      - /run/dbus:/run/dbus:ro

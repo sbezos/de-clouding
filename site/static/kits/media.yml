@@ -1,0 +1,15 @@
+# de-clouding.com kit: music, movies and TV you own (Jellyfin)
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    restart: unless-stopped
+    volumes:
+      - ./jellyfin/config:/config
+      - ./jellyfin/cache:/cache
+      - /srv/media:/media:ro        # put your library here (or change the left side)
+    ports:
+      - "8096:8096"
+    # On an Intel mini PC, uncomment to let the GPU convert video for phones:
+    # devices:
+    #   - /dev/dri:/dev/dri

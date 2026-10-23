@@ -135,3 +135,14 @@ button.copy:disabled { opacity: .75; cursor: default; }
 @media (prefers-reduced-motion: no-preference) {
   .button, button.copy, .card { transition: background-color .15s, border-color .15s; }
 }
+
+/* kits on /box */
+.kit { margin: 1.6rem 0; padding: 1rem 1.1rem 1.1rem; background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
+.kit-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+.kit-head h3 { margin: 0; }
+.kit-dl { font-size: .88rem; font-weight: 600; white-space: nowrap; }
+.kit-intro { margin: .5rem 0 .8rem; }
+.kit-cmd { margin: 0 0 .6rem; white-space: pre-wrap; word-break: break-all; }
+.kit-src summary { cursor: pointer; color: var(--muted); font-size: .9rem; font-weight: 600; }
+.kit-src pre { margin: .5rem 0 0; font-size: .8rem; }
+.kit-verify { margin: .8rem 0 0; font-size: .95rem; }

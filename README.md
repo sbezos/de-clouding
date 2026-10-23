@@ -41,6 +41,7 @@ One-way doors in bootstrap: none destructive. Everything it makes can be deleted
 - Lab notes live in `site/content/notes/*.md`; referenced scripts go in `lab/<role>/`. No hostnames/IPs in either.
 - CSS/JS are in `site/assets/` and fingerprinted by Hugo, so caching never serves a stale stylesheet.
 - `site/content/start.md` + `assets/js/prompt-builder.js` is the in-browser prompt builder.
+- `/box/` is the quick-start: shopping list, base commands, and one small `compose.yml` per room served raw from `site/static/kits/*.yml` (embedded on the page by the `kit` shortcode via `readFile`). Keep each kit independent; no installer.
 - `/play/` is the game ("Bring it home"): `layouts/_default/play.html`, `assets/js/play.js` (rooms, options, events and scoring all live in the data tables at the top), `assets/css/play.css`. Deterministic; no network; localStorage only for the best score.
 - Local preview: `hugo --source site server` → http://localhost:1313
 

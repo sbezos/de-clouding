@@ -1,0 +1,14 @@
+# de-clouding.com kit: DNS filtering and schedules (AdGuard Home)
+# Before starting on Ubuntu: free port 53 from systemd-resolved (see the page).
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    restart: unless-stopped
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "3000:3000/tcp"   # setup wizard, then the admin UI (choose port 3000 in the wizard)
+    volumes:
+      - ./adguard/work:/opt/adguardhome/work
+      - ./adguard/conf:/opt/adguardhome/conf

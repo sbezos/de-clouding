@@ -25,7 +25,7 @@ All prices are rough, in US dollars, for used or entry-level gear. Electricity e
 - Runs a small AI model slowly, or acts as the always-on front door to a bigger machine you only turn on when needed.
 - Idles at roughly 10–20 W: $1–3/month in electricity.
 
-**Adds:** compute, the beginnings of model. **Good for:** people who want the smart-home and file pieces to just work without a laptop open.
+**Adds:** compute, the beginnings of model. **Good for:** people who want the smart-home and file pieces to just work without a laptop open. **Ready to build one?** [The box, in an afternoon](/box/) is the shopping list and the copy-paste kits.
 
 ## Tier 2 — a real home server {#tier-2}
 

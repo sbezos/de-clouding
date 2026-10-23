@@ -1,0 +1,23 @@
+# de-clouding.com kit: encrypted off-site backups with a web UI (Backrest, which runs restic)
+# Point a plan at /userdata, set a schedule, choose a bucket you rent, and do the test restore.
+services:
+  backrest:
+    image: garethgeorge/backrest:latest
+    container_name: backrest
+    hostname: backrest
+    restart: unless-stopped
+    volumes:
+      - ./backrest/data:/data
+      - ./backrest/config:/config
+      - ./backrest/cache:/cache
+      - ./backrest/tmp:/tmp
+      - /home:/userdata/home:ro           # what to back up: add more lines like these
+      - /srv/media:/userdata/media:ro
+    environment:
+      - BACKREST_DATA=/data
+      - BACKREST_CONFIG=/config/config.json
+      - XDG_CACHE_HOME=/cache
+      - TMPDIR=/tmp
+      - TZ=America/New_York
+    ports:
+      - "9898:9898"

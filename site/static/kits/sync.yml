@@ -1,0 +1,17 @@
+# de-clouding.com kit: file sync between your own devices (Syncthing, no server account)
+services:
+  syncthing:
+    image: syncthing/syncthing
+    container_name: syncthing
+    hostname: box
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./syncthing:/var/syncthing
+    ports:
+      - "8384:8384"         # web UI
+      - "22000:22000/tcp"   # sync
+      - "22000:22000/udp"
+      - "21027:21027/udp"   # discovery on your own network

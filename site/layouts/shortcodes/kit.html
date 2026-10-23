@@ -1,0 +1,14 @@
+{{- /* Usage: {{< kit name="photos" title="Photos" port="2283" >}} — embeds static/kits/<name>.yml with a download link */ -}}
+{{- $name := .Get "name" -}}
+{{- $file := printf "static/kits/%s.yml" $name -}}
+{{- $body := readFile $file -}}
+<div class="kit" id="kit-{{ $name }}">
+  <div class="kit-head">
+    <h3>{{ .Get "title" }}</h3>
+    <a class="kit-dl" href="/kits/{{ $name }}.yml" download="compose.yml">Download compose.yml</a>
+  </div>
+  {{ with .Get "intro" }}<p class="kit-intro">{{ . | markdownify }}</p>{{ end }}
+  <pre class="kit-cmd"><code>mkdir -p ~/box/{{ $name }} &amp;&amp; cd ~/box/{{ $name }} &amp;&amp; curl -fsSLo compose.yml https://de-clouding.com/kits/{{ $name }}.yml &amp;&amp; docker compose up -d</code></pre>
+  <details class="kit-src"><summary>What's in it</summary><pre><code>{{ $body }}</code></pre></details>
+  {{ with .Get "verify" }}<p class="kit-verify"><strong>Check:</strong> {{ . | markdownify }}</p>{{ end }}
+</div>

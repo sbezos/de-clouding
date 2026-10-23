@@ -14,4 +14,4 @@ This site is about closing that loop on your side. Keep the useful parts. Keep y
 2. **Pick a budget tier**, from "$0, use what I have" up to "I've got the bug."
 3. **Copy the prompt** at the bottom of the page into Claude or another assistant and let it walk you through the move, one step at a time, with the safety rails already written in.
 
-That's it. Start with whichever one annoys you most.
+That's it. Start with whichever one annoys you most. (Curious how the pieces fit? [Own the stack](/stack/) is the one-page model.)
