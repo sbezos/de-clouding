@@ -6,9 +6,9 @@ I'm Sal. I'm an electrical engineer by training and a patent attorney by trade, 
 
 ## About the name
 
-Yes: Jeff Bezos is my first cousin. I know how that reads on a site called de-clouding, and I'm fine with it, because this is the same advice I give inventors in my day job. **If your data has value, protect it at all costs.** AI is remarkable, but what makes it valuable is access to unique data. Control the access and you control the space.
+Yes, that Bezos — a cousin. The unexpected part is that this is the same advice I give inventors for a living: **if your data has value, protect it at all costs.** AI is remarkable, but its value is unlocked by access to unique data. Control the access and you control the space.
 
-That doesn't mean leaving the cloud. It means deciding what's on it. There is a world of difference between your documents living in a Google Drive and your documents sitting in an encrypted volume on AWS. One can be read, indexed and learned from. The other is yours — held by someone who can't open it, and who can be swapped out tomorrow. This site is hosted on AWS. Nothing of yours passes through it. I don't do any work for Amazon.
+I'm not selling anything here. I just think it's in society's interest to take ownership back, at the one moment when technology has put ordinary people in the best position to do it: the models are open, the software is free, and a used mini PC does what a data center did ten years ago. That doesn't mean getting off the cloud. It means being in charge of what's on it. Documents in a Google Drive can be read, indexed and learned from; the same documents in an encrypted volume on AWS are simply yours. This site lives on AWS. Nothing of yours passes through it.
 
 A few commitments:
 
