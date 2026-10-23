@@ -40,6 +40,11 @@
 .g-line-faint { opacity: .35; }
 .g-house { position: relative; }
 .g-roof { display: block; width: 100%; height: 3.2rem; fill: var(--fg); }
+.g-attic { padding: 6px 6px 0; background: var(--fg); }
+.g-room.g-attic-room { width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .3rem .8rem; min-height: 0; padding: .7rem 1rem; }
+.g-attic-room .g-ico { width: 1.5rem; height: 1.5rem; }
+.g-attic-room .g-room-status { width: 100%; }
+@media (min-width: 40rem) { .g-attic-room .g-room-status { width: auto; } .g-attic-room .g-room-status::before { content: '— '; } }
 .g-rooms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 6px; background: var(--fg); border-radius: 0 0 14px 14px; }
 .g-room { position: relative; display: grid; grid-template-rows: auto auto auto; justify-items: center; gap: .25rem; padding: .9rem .5rem .7rem; background: var(--card); color: var(--fg); border: 0; border-radius: 10px; font: inherit; cursor: pointer; text-align: center; min-height: 7.2rem; transition: background .4s, box-shadow .4s; }
 .g-room:hover { box-shadow: inset 0 0 0 2px var(--brand); }

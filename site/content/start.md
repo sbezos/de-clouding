@@ -16,6 +16,7 @@ Tick what applies. The prompt at the bottom rewrites itself as you go. Then copy
 <label><input type="checkbox" name="service" value="media"> Music, movies, TV</label>
 <label><input type="checkbox" name="service" value="cameras"> Cameras &amp; doorbells</label>
 <label><input type="checkbox" name="service" value="ai"> AI assistant</label>
+<label><input type="checkbox" name="service" value="games"> Kids’ gaming &amp; subscriptions</label>
 <label><input type="checkbox" name="service" value="backups" checked> Backups</label>
 </fieldset>
 

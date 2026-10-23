@@ -13,6 +13,7 @@
     media:     'music, movies and TV',
     cameras:   'cameras and doorbells',
     ai:        'an AI assistant / chatbot',
+    games:     'the kids\' gaming (subscriptions, hosted worlds, in-game spending) — without cutting them off from their friends',
     backups:   'backups of everything above'
   };
   var COMFORT = {

@@ -16,14 +16,32 @@
     { n: 3, label: 'Tier 3', money: '≈ $3,000', cost: 3000, blurb: 'A GPU, lots of storage, and the bug. Nothing on the site assumes this.', box: 'a GPU box' }
   ];
 
-  // What a typical household pays today, $/month, per room. Sums to $88.
-  var BASELINE = { backups: 0, photos: 10, email: 0, passwords: 3, home: 0, media: 45, cameras: 10, network: 0, ai: 20 };
+  // What a typical household pays today, $/month, per room. Sums to $118.
+  var BASELINE = { backups: 0, photos: 10, email: 0, passwords: 3, home: 0, media: 45, cameras: 10, network: 0, ai: 20, games: 30 };
 
   // status: cloud | partial | home | encrypted | risky
   var ROOMS = [
+    { id: 'games', name: 'The kids’ room', icon: 'games', guide: '/guides/games-kids/', attic: true, hint: 'Consoles, subscriptions, and the friends inside them.',
+      options: [
+        { id: 'g1', label: 'Own what they actually play: DRM-free or on cartridge; let the rotating catalogs lapse', blurb: 'Five games they love beat fifty they can lose.', req: 0, monthly: -15, it: 0.2, privacy: 2, control: 6, status: 'home', flags: ['games_owned'],
+          outcome: 'The games they really play now live on a drive and a shelf, not in a catalog that rotates. Nothing vanishes when a payment stops, because there isn’t one.',
+          lesson: 'A subscription is a rental. Rental is fine when everyone knows that’s what it is.' },
+        { id: 'g2', label: 'Run the family’s own Minecraft (or Luanti) server on the box, friends-only', blurb: 'Replaces the hosted-world plan. You decide who’s in it.', req: 1, monthly: -8, it: 1, privacy: 4, control: 6, status: 'home', flags: ['own_server'],
+          outcome: 'Their world lives in your closet, with exactly the friends you’ve approved and no strangers in voice chat. The hosted-world subscription is cancelled.',
+          lesson: 'A server at home is the strongest “safe social” move there is — and the software is free.' },
+        { id: 'g3', label: 'Your own cloud gaming: one gaming PC streamed to every screen in the house', blurb: 'Sunshine on the PC, Moonlight on the TV and tablet.', req: 3, monthly: -15, it: 1.5, privacy: 4, control: 4, status: 'home', flags: ['own_streaming'],
+          outcome: 'The TV and the tablet both play the big games from one machine in the office, over your own network. Nobody’s keystrokes leave the house.',
+          lesson: 'Cloud gaming is just someone else’s PC. You can be the someone else.' },
+        { id: 'g4', label: 'Bedtime and filtering on the router; spending limits in the vendor controls; the battle-pass conversation', blurb: 'Keep the games their friends are on.', req: 0, monthly: -5, it: 0.3, privacy: 5, control: 3, status: 'partial', flags: ['games_rules'],
+          outcome: 'They still play what their friends play. Bedtime is a rule on the router, the allowance is a number instead of a surprise on a statement, and a ten-year-old now knows what a “daily reward” is for.',
+          lesson: 'You can’t self-host Fortnite. You can raise someone who understands it.' },
+        { id: 'g5', label: 'Leave it — they’re happy', blurb: 'Also a decision.', req: 0, monthly: 0, it: 0, privacy: 0, control: 0, status: 'cloud', flags: ['games_cloud'],
+          outcome: 'Fair. Happy kids are the point.',
+          lesson: 'Just add up the subscriptions once, and read the parental-controls page once.' }
+      ] },
     { id: 'backups', name: 'Backups', icon: 'backups', guide: '/guides/backups/', hint: 'The safety net. The guides say to do this first.',
       options: [
-        { id: 'b2', label: 'Automatic, encrypted off-site backup', blurb: 'restic or Kopia on a schedule, encrypted on your machine, shipped to a storage bucket you rent. Plus a local copy.', req: 0, monthly: 3, it: 0.5, privacy: 4, control: 20, status: 'encrypted', flags: ['backups_321'],
+        { id: 'b2', label: 'Automatic, encrypted off-site backup', blurb: 'restic or Kopia on a schedule, encrypted on your machine, shipped to a storage bucket you rent. Plus a local copy.', req: 0, monthly: 3, it: 0.5, privacy: 4, control: 18, status: 'encrypted', flags: ['backups_321'],
           outcome: 'Every night your important folders are encrypted here and shipped to a bucket you rent. The provider stores noise. A second copy sits on a drive at home.',
           lesson: 'This is “cloud you control”: they hold it, they can’t read it, you can leave.' },
         { id: 'b1', label: 'An external drive, copied by hand when I remember', blurb: 'Cheap and simple.', req: 0, cost: 60, monthly: 0, it: 0.5, privacy: 0, control: 6, status: 'partial', flags: ['backups_local'],
@@ -38,10 +56,10 @@
         { id: 'p1', label: 'Export it all; keep it on drives you own; sync devices with Syncthing', blurb: 'No server. Your devices talk to each other directly.', req: 0, cost: 80, monthly: -10, it: 1, privacy: 12, control: 8, status: 'home',
           outcome: 'Three days of downloading later, your photos live on drives you can hold. Your phone and laptop stay in sync without a company in the middle.',
           lesson: 'Tier 0 owns the Data layer. The face search is gone — but so is the face scanning.' },
-        { id: 'p2', label: 'Immich on the always-on box', blurb: 'Phone backup, faces, map and search — all at home.', req: 1, monthly: -10, it: 2, privacy: 18, control: 12, status: 'home',
+        { id: 'p2', label: 'Immich on the always-on box', blurb: 'Phone backup, faces, map and search — all at home.', req: 1, monthly: -10, it: 2, privacy: 16, control: 11, status: 'home',
           outcome: 'It looks like the cloud app you left. The only computer looking at your kids’ faces is the one in your closet.',
           lesson: 'Free software caught up: search, faces and maps all run locally now.' },
-        { id: 'p3', label: 'A NAS appliance with its own photo app', blurb: 'Mirrored drives, no terminal.', req: 2, monthly: -10, it: 1, privacy: 16, control: 12, status: 'home', flags: ['snapshots'],
+        { id: 'p3', label: 'A NAS appliance with its own photo app', blurb: 'Mirrored drives, no terminal.', req: 2, monthly: -10, it: 1, privacy: 14, control: 11, status: 'home', flags: ['snapshots'],
           outcome: 'Click, click, done. Mirrored drives, snapshots, a photo app the whole family can use.',
           lesson: 'Appliances trade a little control for a lot less maintenance. That’s a fine trade.' },
         { id: 'p4', label: 'Keep the cloud photo service; download an export once a year', blurb: 'The smallest possible move.', req: 0, monthly: 0, it: 0.2, privacy: 2, control: 4, status: 'cloud',
@@ -50,7 +68,7 @@
       ] },
     { id: 'email', name: 'Email & calendar', icon: 'email', guide: '/guides/email/', hint: 'The one guide that says don’t self-host.',
       options: [
-        { id: 'e2', label: 'Your own domain at an encrypted mail provider', blurb: 'you@yourname.com. The provider becomes swappable.', req: 0, monthly: 5, it: 0.2, privacy: 12, control: 15, status: 'encrypted', flags: ['mail_owndomain'],
+        { id: 'e2', label: 'Your own domain at an encrypted mail provider', blurb: 'you@yourname.com. The provider becomes swappable.', req: 0, monthly: 5, it: 0.2, privacy: 12, control: 14, status: 'encrypted', flags: ['mail_owndomain'],
           outcome: 'An address you’ll keep for life, hosted by a company that can’t read your mailbox and that you can swap in an afternoon.',
           lesson: 'Owning the address is the control. The provider becomes a utility.' },
         { id: 'e1', label: 'Run my own mail server', blurb: 'Full control. What could go wrong?', req: 1, monthly: 1, it: 4, privacy: 10, control: 5, status: 'risky', flags: ['mail_selfhost'],
@@ -137,10 +155,10 @@
         { id: 'a2', label: 'Hybrid: local model for anything personal; a hosted assistant on a no-training plan for the hard problems', blurb: 'Where most people land.', req: 0, monthly: 0, it: 0.5, privacy: 10, control: 4, status: 'partial', flags: ['ai_hybrid'],
           outcome: 'Daily life runs local. The hosted one gets the occasional hard problem, and nothing personal.',
           lesson: 'Most people end up here, and it’s a fine place to be.' },
-        { id: 'a3', label: 'A 12–14B model on the home server, with a chat site for the whole family', blurb: 'Open WebUI over the VPN; reads your own documents.', req: 2, monthly: -20, it: 1.5, privacy: 18, control: 6, status: 'home', flags: ['ai_local'],
+        { id: 'a3', label: 'A 12–14B model on the home server, with a chat site for the whole family', blurb: 'Open WebUI over the VPN; reads your own documents.', req: 2, monthly: -20, it: 1.5, privacy: 16, control: 6, status: 'home', flags: ['ai_local'],
           outcome: 'Responsive, reads your own files, works from your phone over the VPN. The family stops paying for four chatbot subscriptions.',
           lesson: 'Tier 2 is where the local assistant stops feeling like a compromise.' },
-        { id: 'a4', label: 'A GPU box: 20–30B models at speed, image and voice models alongside', blurb: 'The full stack.', req: 3, monthly: -20, it: 3, privacy: 18, control: 6, status: 'home', flags: ['ai_local'],
+        { id: 'a4', label: 'A GPU box: 20–30B models at speed, image and voice models alongside', blurb: 'The full stack.', req: 3, monthly: -20, it: 3, privacy: 16, control: 6, status: 'home', flags: ['ai_local'],
           outcome: 'It’s fast. It’s yours. It idles at the power draw of a fridge.',
           lesson: 'Tier 3 is the whole column. Nothing on the site assumes it.' },
         { id: 'a5', label: 'Keep the hosted assistant', blurb: 'It is very good.', req: 0, monthly: 0, it: 0, privacy: 0, control: 0, status: 'cloud', flags: ['ai_hosted'],
@@ -152,6 +170,19 @@
   // Events: picked after weekends 3, 5 and 7. relevance(): 0 = not applicable, 1 = neutral,
   // 2 = rewards a good call, 3 = tests a risky one. resolve() returns {text, lesson, fx}.
   var EVENTS = [
+    { id: 'catalog_rotates', title: 'The catalog rotates',
+      relevance: function (s) { if (!s.done.games || s.events.indexOf('stranger_chat') >= 0) return 0; return s.has('games_cloud') ? 3 : (s.has('games_owned') ? 2 : 1); },
+      resolve: function (s) {
+        if (s.has('games_owned')) return { text: 'The game your kid has played all year is leaving the subscription catalog on the 30th. You already own it. Nobody in the house finds out.', lesson: 'Owned games don’t have expiry dates.', fx: { control: 2 } };
+        return { text: 'The game your kid has played all year leaves the subscription catalog on the 30th. There’s a sale on it — for the version that works offline. You buy it, and quietly add up what the subscription cost in the meantime.', lesson: 'Rotating catalogs are the business model, not a bug.', fx: { control: -3, monthly: 2 } };
+      } },
+    { id: 'stranger_chat', title: 'Someone new in the voice chat',
+      relevance: function (s) { if (!s.done.games || s.events.indexOf('catalog_rotates') >= 0) return 0; return s.has('own_server') ? 2 : (s.has('games_rules') ? 1 : 3); },
+      resolve: function (s) {
+        if (s.has('own_server')) return { text: 'Your kid asks if a friend-of-a-friend can join the server. You add one name to the allow-list and nobody else gets in. That was the whole conversation.', lesson: 'Friends-only is a list you keep, not a setting they change.', fx: { control: 2 } };
+        if (s.has('games_rules')) return { text: 'An adult you’ve never heard of is chatting in your kid’s public game. Because you’d talked about this, your kid tells you. You report, block, and move on together.', lesson: 'The conversation worked. It usually does.', fx: { privacy: 1 } };
+        return { text: 'You overhear an adult voice in the public world your kid has been playing in for weeks. You hadn’t known voice chat was on.', lesson: 'Public worlds have public people in them. A home server, or at least the conversation, changes that.', fx: { privacy: -4, control: -2 } };
+      } },
     { id: 'drive_dies', title: 'A drive dies',
       relevance: function (s) { if (s.st('photos') === 'home') return s.has('backups_321') ? 2 : 3; return 1; },
       resolve: function (s) {
@@ -258,24 +289,28 @@
     var clouded = ROOMS.map(function (r, i) { return { i: i, s: state.st(r.id) }; });
     var nCloud = clouded.filter(function (c) { return c.s === 'cloud'; }).length;
     var scale = 0.5 + 0.5 * (nCloud / ROOMS.length);
+    var gridIndex = 0;
     var lines = clouded.map(function (c) {
+      var isAttic = !!ROOMS[c.i].attic; var gi = isAttic ? -1 : gridIndex++;
       if (c.s === 'cloud' || c.s === 'partial' || c.s === 'risky') {
-        var col = c.i % 3, row = Math.floor(c.i / 3);
-        var x = 100 + col * 200 + (row - 1) * 46;
+        var x;
+        if (isAttic) { x = 300; } else { var col = gi % 3, row = Math.floor(gi / 3); x = 100 + col * 200 + (row - 1) * 46; }
         var cls = c.s === 'cloud' ? 'g-line' : 'g-line g-line-faint';
         return '<path class="' + cls + '" d="M' + x + ' 92v58"/>';
       }
       return '';
     }).join('');
-    var tiles = ROOMS.map(function (r) {
+    function tile(r) {
       var st = state.st(r.id); var done = !!state.done[r.id];
       var dead = done || !interactive;
-      return '<button type="button" class="g-room g-' + st + (done ? ' g-done' : '') + '" data-room="' + r.id + '"' + (dead ? ' aria-disabled="true" tabindex="-1"' : '') + '>' +
+      return '<button type="button" class="g-room g-' + st + (done ? ' g-done' : '') + (r.attic ? ' g-attic-room' : '') + '" data-room="' + r.id + '"' + (dead ? ' aria-disabled="true" tabindex="-1"' : '') + '>' +
         '<span class="g-badge g-badge-' + STATUS[st].badge + '" aria-hidden="true"></span>' +
         ICON(r.icon) + '<span class="g-room-name">' + r.name + '</span>' +
         '<span class="g-room-status">' + (done ? STATUS[st].label : (interactive ? 'tap to decide' : 'never got to it')) + '</span>' +
       '</button>';
-    }).join('');
+    }
+    var attic = ROOMS.filter(function (r) { return r.attic; }).map(tile).join('');
+    var tiles = ROOMS.filter(function (r) { return !r.attic; }).map(tile).join('');
     return '<div class="g-scene' + (interactive ? '' : ' g-scene-final') + '">' +
         '<svg class="g-sky" viewBox="0 0 600 150" aria-hidden="true">' +
           '<g class="g-cloud" style="transform:scale(' + scale.toFixed(2) + ')"><circle cx="230" cy="60" r="36"/><circle cx="285" cy="40" r="46"/><circle cx="345" cy="50" r="40"/><circle cx="385" cy="70" r="28"/><rect x="200" y="50" width="210" height="44" rx="22"/></g>' +
@@ -283,6 +318,7 @@
         '</svg>' +
         '<div class="g-house">' +
           '<svg class="g-roof" viewBox="0 0 600 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 300 4 600 70Z"/></svg>' +
+          (attic ? '<div class="g-attic">' + attic + '</div>' : '') +
           '<div class="g-rooms">' + tiles + '</div>' +
         '</div>' +
       '</div>';
