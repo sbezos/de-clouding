@@ -122,6 +122,8 @@
 @media (prefers-color-scheme: dark) { .g-moves li.g-s-risky { color: #ffb09c; } }
 .g-undone { color: var(--muted); font-size: .92rem; }
 .g-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin: 1.2rem 0 .5rem; }
+.g-actions .copy { font: 700 .98rem var(--font); padding: .7rem 1.2rem; }
+.g-actions .copy:hover { background: var(--brand); color: #fff; }
 
 @media (prefers-reduced-motion: reduce) {
   .g-bar > div, .g-cloud, .g-line, .g-room { transition: none; }

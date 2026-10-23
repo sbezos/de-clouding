@@ -462,6 +462,8 @@
     var risky = state.log.filter(function (m) { return m.status === 'risky'; });
 
     var prompt = buildPrompt(ROOMS.filter(function (r) { return !state.done[r.id]; }).map(function (r) { return r.name; }));
+    var homeCount = state.log.filter(function (m) { return m.status === 'home' || m.status === 'encrypted'; }).length;
+    var share = 'I brought ' + homeCount + ' of ' + ROOMS.length + ' rooms home at ' + TIERS[state.tier].label + ' (' + TIERS[state.tier].money + ') in the de-clouding game: privacy ' + p + ', control ' + c + (yearly > 0 ? ', ' + money(yearly) + '/year back' : '') + (hard ? ', and learned one thing the hard way' : '') + '. Eight weekends, one house, your data: https://de-clouding.com/play/';
     var best = saveBest({ privacy: p, control: c, saved: yearly, tier: state.tier });
 
     root.innerHTML =
@@ -478,7 +480,8 @@
         '<h3>What you did</h3><ol class="g-moves">' + moves + '</ol>' +
         (undone.length ? '<p class="g-undone">Rooms you never got to: ' + undone.join(', ') + '.</p>' : '') +
         (best ? '<p class="g-best">New best run saved in this browser.</p>' : '') +
-        '<div class="g-actions"><button type="button" class="button" data-action="restart">Play again</button> <a class="button ghost" href="/start/">Do it for real</a></div>' +
+        '<div class="g-actions"><button type="button" class="button" data-action="restart">Play again</button> <a class="button ghost" href="/start/">Do it for real</a> <button type="button" class="button ghost copy" data-copy-target="#g-share">Copy my result</button></div>' +
+        '<pre id="g-share" hidden>' + esc(share) + '</pre>' +
         '<section class="prompt-box"><div class="prompt-head"><h2 id="g-prompt-h">Make it real</h2><button class="copy" type="button" data-copy-target="#g-prompt">Copy prompt</button></div>' +
         '<p class="prompt-help">This prompt was built from the choices you just made. Paste it into Claude (or any assistant you trust) and it will walk you through the same moves, for real, one step at a time.</p>' +
         '<pre id="g-prompt" class="prompt">' + esc(prompt) + '</pre></section>' +
