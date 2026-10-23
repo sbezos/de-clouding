@@ -62,6 +62,28 @@ Online play on Nintendo, Xbox and PlayStation networks needs their subscription;
 - **Spending**: buy Robux and V-Bucks as gift cards instead of saving a card on the account; enable purchase PINs where offered.
 {{% /deep %}}
 
+
+{{% deep title="The commands" %}}
+**Let phones, tablets and consoles into the Java server** — add Geyser and Floodgate to the kit's environment and open the Bedrock port:
+
+```yaml
+    environment:
+      # …existing lines…
+      - PLUGINS=https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot,https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
+    ports:
+      - "25565:25565"
+      - "19132:19132/udp"
+```
+
+Bedrock players then join at `box` port 19132; Floodgate lets them in without a Java account, and they still have to be on the allow-list (Bedrock names get a `.` prefix — `whitelist add .TheirName`). Consoles additionally need the BedrockConnect DNS trick or a self-hosted BedrockConnect instance; the project's README is the authority and it changes with console firmware.
+
+**Allow-list management** without opening a console: `docker compose exec minecraft rcon-cli whitelist add Name`, `whitelist remove Name`, `whitelist list`; `rcon-cli say Dinner in five` is the house intercom.
+
+**Your own cloud gaming**: install Sunshine on the gaming PC (it runs as a service and uses the GPU encoder), pair Moonlight on the TV box by entering the PIN once, and set the stream to the TV's resolution at 60 fps. Wire both ends with Ethernet; Wi-Fi works, latency doesn't.
+
+**Bedtime on the router instead of in a vendor app**: in AdGuard Home, Clients → add the console by MAC → *Schedule* for blocked hours; or your router's per-device schedule. Spending caps stay in the vendor's family tools — that's the one job they do well.
+{{% /deep %}}
+
 {{< tiers
   t0="Buy the five games they actually play, DRM-free or on cartridge; let the rotating catalogs lapse; set spending limits; have the battle-pass conversation. Zero hardware."
   t1="A Minecraft or Luanti server on the small box, friends-only. A DNS filter and router schedules for bedtime."

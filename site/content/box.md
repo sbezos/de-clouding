@@ -96,3 +96,16 @@ Everything here is one file per service on purpose: no installer, no magic, noth
 - **Hardware transcoding** for Jellyfin and Immich on an Intel box: uncomment the `/dev/dri` lines and install `intel-media-va-driver-non-free`. A Pi has no equivalent; it'll direct-play most files and struggle to transcode.
 - **One thing per kit, one folder per kit** is the design. When something breaks, `docker compose logs --tail=100` in that folder is the whole debugging surface.
 {{% /deep %}}
+
+
+{{% deep title="Verify the whole box in one go" %}}
+After a reboot, or when something feels off:
+
+```
+for d in ~/box/*/; do (cd "$d" && echo "== $(basename "$d")" && docker compose ps --format 'table {{.Name}}\t{{.Status}}'); done
+for p in 9898 3000 2283 8080 8384 8096 8123 25565 3001; do curl -s -o /dev/null -w "port $p → %{http_code}\n" --max-time 3 http://127.0.0.1:$p/ || echo "port $p → no answer"; done
+sudo tailscale status | head -5
+```
+
+Everything should say `Up` and answer with a 200, 302 or 401 (a login page is a healthy answer). The Minecraft port will show "no answer" to HTTP — that's normal; it isn't a web server.
+{{% /deep %}}

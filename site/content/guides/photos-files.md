@@ -40,6 +40,21 @@ Off-site backup space, encrypted on your side (see [Backups](/guides/backups/)).
 - **Update discipline**: Immich moves fast and announces breaking changes in release notes. Read them before `docker compose pull`; keep the database in the backup plan.
 {{% /deep %}}
 
+
+{{% deep title="The commands" %}}
+**Google Takeout into Immich, with dates and albums intact** — `immich-go` reads the Takeout zips directly:
+
+```
+immich-go upload from-google-photos --server http://box:2283 --api-key YOUR_KEY ~/Downloads/takeout-*.zip
+```
+
+(Make the API key in Immich under Account → API Keys. Syntax moved between versions; `immich-go --help` is the authority.)
+
+**Syncthing without a server**, for the zero-hardware route: install on each device, open the web UI on one (`http://127.0.0.1:8384`), Actions → Show ID, add that ID on the other device, share a folder, accept. Set the phone's camera folder to *Send Only* and the laptop's copy to *Receive Only* so a phone wipe can't delete the archive.
+
+**Where the files live** matters more than the app: with Immich's storage template on, your library is ordinary `YYYY/MM/photo.jpg` files on disk — point the backup kit at `UPLOAD_LOCATION`, and the Immich database folder too, and you can walk away from Immich any time with everything intact.
+{{% /deep %}}
+
 {{< tiers
   t0="Export everything, keep it on an external drive and a second one, and use Syncthing between your own devices. Cancel the storage tier you were paying for."
   t1="Immich or a NAS app on the small box. Phones back up automatically when they're home on Wi-Fi."

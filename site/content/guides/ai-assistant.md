@@ -43,6 +43,30 @@ A hosted assistant for the hard problems, if you want one — ideally under a pa
 - **Beyond chat**: Whisper for speech-to-text and Piper for text-to-speech make a local voice assistant; vision-language models let your photo library be searched by description; Home Assistant can use your local model as its conversation agent.
 {{% /deep %}}
 
+
+{{% deep title="The commands" %}}
+**Ollama settings that matter** (as environment variables on the service or in the kit's compose file):
+
+```
+OLLAMA_KEEP_ALIVE=-1        # keep the model loaded instead of unloading after 5 minutes
+OLLAMA_NUM_PARALLEL=2       # concurrent requests, costs memory
+OLLAMA_FLASH_ATTENTION=1    # smaller KV cache on supported hardware
+```
+
+Context length is per model and defaults low; make a longer-context variant with a Modelfile:
+
+```
+FROM qwen3:4b
+PARAMETER num_ctx 16384
+```
+
+`ollama create qwen3-16k -f Modelfile`. More context costs memory linearly — watch `ollama ps`.
+
+**Your documents, searchable**: in Open WebUI, Admin → Settings → Documents, set the embedding engine to Ollama with a small embedding model (`ollama pull nomic-embed-text`), then upload files into a Knowledge collection and reference it in chat with `#`. Everything — the text, the embeddings, the index — stays on the box.
+
+**Home Assistant as a voice for it**: Settings → Devices & services → Add → *Ollama*, URL `http://box:11434`, pick the model; then choose it as the conversation agent of a voice assistant. Ask the house what the temperature is, in your own words.
+{{% /deep %}}
+
 {{< tiers
   t0="LM Studio or Ollama on the laptop you own. A 4–8B model answers in a few seconds. Nothing leaves the room."
   t1="Ollama on the small box so it's always available, slowly, to every device — or the box acts as the front door to your laptop when it's on."

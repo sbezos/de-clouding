@@ -12,3 +12,8 @@ Each note follows the same shape: **symptom → cause → fix → how to make it
 {{% /easy %}}
 
 If one of these saved you time, or you found a better way, [open an issue](https://github.com/sbezos/de-clouding/issues).
+
+
+{{% deep title="Writing a note" %}}
+If you want to contribute one, the shape is fixed so they stay scannable: **Setup** (hardware, versions — exact), **Symptom** (what you saw, with the literal error text so search engines find it), **Cause** (one paragraph, no speculation), **Fix** (commands that were actually run), **Making it stick** (what survives a reboot or an update), **Gotchas** (the three things you'd tell a friend). Scripts go in `lab/<role>/` with hostnames and addresses removed. One problem per note.
+{{% /deep %}}

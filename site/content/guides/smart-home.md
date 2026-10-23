@@ -36,6 +36,31 @@ Possibly nothing. If you keep vendor speakers, you keep that vendor's voice serv
 - **Backups**: Home Assistant makes its own backup archives on a schedule — send them to the box or NAS so the backup kit sweeps them off-site.
 {{% /deep %}}
 
+
+{{% deep title="The commands" %}}
+**Zigbee without a vendor hub** — Zigbee2MQTT plus a broker, as a kit-style compose file next to the Home Assistant one:
+
+```yaml
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    restart: unless-stopped
+    volumes: [./mosquitto:/mosquitto]
+    ports: ["1883:1883"]
+  zigbee2mqtt:
+    image: koenkk/zigbee2mqtt
+    restart: unless-stopped
+    volumes: [./z2m:/app/data, /run/udev:/run/udev:ro]
+    ports: ["8081:8080"]
+    environment: [TZ=America/New_York]
+    devices: ["/dev/serial/by-id/usb-YOUR-ZIGBEE-STICK-ID:/dev/ttyACM0"]
+```
+
+Find the stick's stable path with `ls /dev/serial/by-id/`; a minimal `mosquitto/config/mosquitto.conf` is `listener 1883` plus `allow_anonymous true` on a trusted network (or set a user). Home Assistant then discovers everything through its MQTT integration. Pick a Zigbee channel (15, 20 or 25) that doesn't sit under your busiest Wi-Fi channel; interference is the usual cause of "my sensor fell off the network."
+
+**Voice, fully local**: in Home Assistant, Settings → Voice assistants → Add assistant; pick Whisper (or Speech-to-Phrase) for speech-to-text, Piper for text-to-speech, and either the built-in intent handler or the Ollama integration pointed at `http://box:11434` for natural language. The satellite can be Home Assistant's own voice hardware or an ESP32 running the voice firmware.
+{{% /deep %}}
+
 {{< tiers
   t0="Install Home Assistant on an old laptop or in a virtual machine on your computer to try it. Start turning off cloud features on devices that support local control."
   t1="This is tier 1's natural home: a Raspberry Pi or mini PC running Home Assistant 24/7, plus a $30 Zigbee/Z-Wave USB stick to free devices from their hubs."

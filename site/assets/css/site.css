@@ -163,3 +163,26 @@ html[data-depth="deep"] .depth-easy { display: none; }
 .depth-deep pre { font-size: .82rem; }
 .depth-deep th:first-child, .depth-deep td:first-child { white-space: normal; width: auto; padding-right: .7rem; }
 .depth-deep table { display: block; overflow-x: auto; }
+
+/* ---- Dig deep: the page itself changes register ---- */
+html[data-depth="deep"] { --sky: #c6dbe3; --bg: #f1f5f5; --card: #fafcfc; --line: #cfdcda; }
+@media (prefers-color-scheme: dark) {
+  html[data-depth="deep"] { --sky: #11242c; --bg: #0d1518; --card: #131d21; --line: #22343a; }
+}
+html[data-depth="deep"] .sky { height: 40rem; }
+html[data-depth="deep"] .sky::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(29, 107, 100, .13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29, 107, 100, .13) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: linear-gradient(#000 20%, transparent 100%); mask-image: linear-gradient(#000 20%, transparent 100%);
+}
+@media (prefers-color-scheme: dark) {
+  html[data-depth="deep"] .sky::before { background-image: linear-gradient(rgba(95, 193, 180, .10) 1px, transparent 1px), linear-gradient(90deg, rgba(95, 193, 180, .10) 1px, transparent 1px); }
+}
+html[data-depth="deep"] .depth-switch button[aria-pressed="true"] { background: var(--brand); color: #fff; }
+html[data-depth="deep"] .depth-switch { border-color: color-mix(in srgb, var(--brand) 45%, var(--line)); }
+html[data-depth="deep"] .eyebrow::before { content: "▣ "; font-size: .75em; }
+html[data-depth="deep"] .depth-label::before { content: "▣ "; }
+html[data-depth="deep"] .site-footer { border-top-style: dashed; }

@@ -39,6 +39,43 @@ All the encrypted providers have import tools that pull your old mail across. Ke
 - **Aliases**: SimpleLogin or addy.io (or Proton's built-in aliases) give every website its own address, so a leaked list points at one alias you can kill.
 {{% /deep %}}
 
+
+{{% deep title="The commands" %}}
+**A local mirror of your mailbox** with `mbsync` (the isync package), here against Proton Bridge — the pattern is identical for any IMAP provider, just change host and port:
+
+```
+# ~/.mbsyncrc
+IMAPAccount mail
+Host 127.0.0.1
+Port 1143
+User you@yourdomain.com
+PassCmd "cat ~/.mail-pass"
+TLSType STARTTLS
+CertificateFile ~/.config/protonmail/bridge-v3/cert.pem
+
+IMAPStore mail-remote
+Account mail
+
+MaildirStore mail-local
+Path ~/Mail/
+Inbox ~/Mail/INBOX
+SubFolders Verbatim
+
+Channel mail
+Far :mail-remote:
+Near :mail-local:
+Patterns *
+Create Near
+Sync Pull
+Expunge None
+SyncState *
+```
+
+`mbsync -a` on an hourly timer gives you a Maildir that is yours regardless of provider; `Sync Pull` and `Expunge None` make it an archive, not a two-way mirror, so a mistaken delete on the server never reaches it. Point the backup kit at `~/Mail`.
+
+**DNS for the owned address**, whatever the provider: an `MX` record to their servers, a `TXT` SPF record (`v=spf1 include:<their include> -all`), the `DKIM` CNAMEs they give you, and a `DMARC` record starting at `p=none` with a reporting address so you can see who's sending as you before tightening to `quarantine`.
+{{% /deep %}}
+
 {{< tiers
   t0="This whole guide is a tier 0 move. Domain plus encrypted mailbox, nothing to buy."
   t1="Optionally: self-host your *calendar and contacts* (Radicale, Baïkal, or Nextcloud) on the small box, and keep only mail with the provider."

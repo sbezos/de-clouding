@@ -71,3 +71,15 @@ For each one, tell me in a short table:
 
 Then recommend the three moves with the best payoff for the least effort, and ask me which one to start with.
 {{< /prompt >}}
+
+
+{{% deep title="How these prompts are built, and how to use them with an agent" %}}
+Every hand-off prompt on this site has the same four parts, and knowing them lets you write your own:
+
+1. **Intake** — devices, data sizes, comfort level, budget tier. Specific inputs make the assistant stop guessing.
+2. **Constraints that protect you** — backups before moves, old and new side by side, nothing exposed, flag the irreversible, check current docs. These are the rails; they do more work than any clever phrasing.
+3. **Sequencing** — "one step at a time, wait for my result." Pasting output back is what turns a chatbot into a careful operator.
+4. **A first move that is a question** — "ask me what you need, propose an order, wait for agreement." It front-loads the thinking.
+
+If you use an **agentic** assistant (one that can run commands on a machine, such as Claude Code or Claude in the desktop app) rather than a chat window, the same prompts work with one change: tell it which machine it is on and that it may run read-only commands freely but must show you any command that changes state before running it. Run it *on the box* in the kit's folder and it can read `docker compose logs` itself instead of asking you to paste them.
+{{% /deep %}}

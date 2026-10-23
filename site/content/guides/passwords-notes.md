@@ -43,6 +43,24 @@ Nothing, unless you choose a hosted encrypted tier for convenience — which is 
 - **Notes**: Obsidian stores Markdown files, which is the most future-proof format there is; sync them with Syncthing or any file sync. Joplin encrypts end-to-end and syncs to WebDAV, Nextcloud or an S3 bucket. Both export to plain files.
 {{% /deep %}}
 
+
+{{% deep title="The commands" %}}
+**A scheduled, encrypted export of the vault** — the one thing even a self-hosted vault needs, because a corrupted database and a perfect backup of it are the same thing. The Bitwarden CLI works against Vaultwarden:
+
+```
+bw config server https://box.your-tailnet.ts.net:8443
+bw login you@yourdomain.com
+export BW_SESSION=$(bw unlock --raw)
+bw export --format encrypted_json --password "$(cat ~/.bw-export-pass)" --output ~/vault-exports/$(date +%F).json
+```
+
+Weekly, from the backup machine, into a folder the backup kit already covers. The export is encrypted with its own password, so it's safe to sit next to everything else.
+
+**Vaultwarden hardening after onboarding**, in the kit's `compose.yml`: `SIGNUPS_ALLOWED=false`, `ADMIN_TOKEN` set to the output of `docker compose exec vaultwarden /vaultwarden hash` (an argon2 hash, not the plain token), and `DOMAIN` matching the HTTPS address exactly — the apps refuse a mismatch.
+
+**KeePassXC** stores TOTP codes too, which raises the fair question of whether your second factor should live in the same vault as the password. Reasonable people split them: passwords in the vault, TOTP in a separate app (Aegis on Android, any iOS authenticator), hardware keys for the accounts that matter most.
+{{% /deep %}}
+
 {{< tiers
   t0="Bitwarden's free hosted tier plus Obsidian with notes synced by Syncthing. No server, no cost."
   t1="Vaultwarden and Joplin's sync target on the small box. Your vault never leaves the house."

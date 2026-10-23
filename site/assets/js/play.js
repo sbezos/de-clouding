@@ -363,6 +363,7 @@
     var opts = r.options.map(function (o) {
       var locked = o.req > state.tier;
       var meta = [delta$(o.monthly), hours(o.it)]; if (o.cost) meta.push('$' + o.cost + ' once');
+      if (document.documentElement.getAttribute('data-depth') === 'deep') { meta.push('privacy +' + o.privacy); meta.push('control +' + o.control); if (o.flags && o.flags.length) meta.push('flags: ' + o.flags.join(', ')); }
       return '<button type="button" class="g-opt' + (locked ? ' g-locked' : '') + '" data-opt="' + o.id + '"' + (locked ? ' disabled' : '') + '>' +
         '<span class="g-opt-label">' + o.label + '</span>' +
         '<span class="g-opt-blurb">' + o.blurb + '</span>' +

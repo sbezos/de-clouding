@@ -35,6 +35,42 @@ A caution: cameras are the one category where **network isolation matters most**
 - **Night and weather**: PoE cameras over Wi-Fi ones every time — power and data in one cable, no battery, no dropouts.
 {{% /deep %}}
 
+
+{{% deep title="The commands" %}}
+**A minimal Frigate config** for one camera, detection on the low-resolution sub-stream, recording from the main stream, object detection on an Intel iGPU via OpenVINO (swap the detector block for a Coral or Hailo if you have one):
+
+```yaml
+mqtt:
+  enabled: false
+detectors:
+  ov:
+    type: openvino
+    device: GPU
+cameras:
+  front_door:
+    ffmpeg:
+      inputs:
+        - path: rtsp://user:pass@192.168.60.10:554/h264Preview_01_sub
+          roles: [detect]
+        - path: rtsp://user:pass@192.168.60.10:554/h264Preview_01_main
+          roles: [record]
+    detect:
+      width: 640
+      height: 360
+    record:
+      enabled: true
+      retain:
+        days: 7
+        mode: motion
+    objects:
+      track: [person, car, package]
+```
+
+Frigate's container needs `/dev/dri` passed through for OpenVINO, a generous `shm_size` (the docs give the formula by camera count), and a disk for `/media/frigate`. The stream paths above are Reolink's; every brand documents its own.
+
+**Finding what a camera talks to**: on the camera VLAN, `tcpdump -ni <iface> host 192.168.60.10 and not port 554` for ten minutes shows every outbound connection it attempts. Then block them all at the firewall and see if anything you need breaks (it won't).
+{{% /deep %}}
+
 {{< tiers
   t0="If you already own cloud cameras, check whether they support local recording to a memory card or a local hub and turn off the subscription. Otherwise, wait for tier 1."
   t1="One or two local-recording cameras plus Frigate on the small box, with an accelerator if you want smart detection."

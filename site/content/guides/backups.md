@@ -36,6 +36,26 @@ Tools that do this well and are free: restic, Kopia, Borg (Linux/Mac), and the b
 - If you'd rather not run this from a terminal, **Backrest** wraps restic in a web UI with schedules, retention and a restore browser — it's the [backups kit](/box/#kit-backups) on the box page.
 {{% /deep %}}
 
+
+{{% deep title="The commands" %}}
+A complete restic setup against an S3-compatible bucket, from nothing to a tested restore. The passphrase file is the key to everything — keep a copy somewhere that isn't this machine (a password manager entry is the usual answer).
+
+```
+export RESTIC_REPOSITORY=s3:s3.us-west-004.backblazeb2.com/my-backups   # any S3-compatible endpoint
+export RESTIC_PASSWORD_FILE=~/.restic-pass                               # a long random passphrase, mode 600
+export AWS_ACCESS_KEY_ID=…  AWS_SECRET_ACCESS_KEY=…                     # a key that can write but not delete
+
+restic init
+restic backup ~/Photos ~/Documents --exclude-caches --one-file-system
+restic snapshots
+restic forget --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --prune
+restic check --read-data-subset=5%
+restic restore latest --target /tmp/restore --include ~/Documents/one-file.pdf
+```
+
+Run `backup` and `forget` nightly from a systemd timer or cron; run `check` monthly; do the `restore` by hand each quarter and actually open the file. Kopia's equivalents are `kopia repository create s3 …`, `kopia snapshot create`, `kopia snapshot restore`, with retention set as a policy (`kopia policy set --keep-daily 7 …`). If you'd rather click, the [Backrest kit](/box/#kit-backups) does all of this through a web page and schedules it for you.
+{{% /deep %}}
+
 {{< tiers
   t0="Back the laptop up to an external drive weekly (Time Machine / File History), and run a free encrypted backup tool to a cheap storage bucket for the irreplaceable folder — photos, documents."
   t1="The small box holds a copy of every device's files; it backs *itself* up, encrypted, to the bucket nightly."

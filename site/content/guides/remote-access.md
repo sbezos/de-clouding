@@ -37,6 +37,27 @@ With Tailscale: a free account for the introduction service, carrying no data of
 - **Switch off**: UPnP (devices punching their own holes), WPS, and any "DMZ host" setting. Check your router's admin page isn't reachable from the WAN side.
 {{% /deep %}}
 
+
+{{% deep title="The commands" %}}
+**Tailscale access rules** — the one policy file that decides who reaches what. This gives every member of your tailnet access to everything on the box, and gives a `kids` tag (their friends' devices) exactly one port:
+
+```json
+{
+  "tagOwners": { "tag:box": ["autogroup:admin"], "tag:guest": ["autogroup:admin"] },
+  "acls": [
+    { "action": "accept", "src": ["autogroup:member"], "dst": ["tag:box:*"] },
+    { "action": "accept", "src": ["tag:guest"],        "dst": ["tag:box:25565"] }
+  ]
+}
+```
+
+Tag the box with `sudo tailscale up --advertise-tags=tag:box`, and tag a friend's shared device `tag:guest` when you accept it. **Subnet routing** so your phone can reach the TV box or printer that can't run Tailscale: `sudo tailscale up --advertise-routes=192.168.1.0/24` on the box, then approve the route in the admin console.
+
+**Plain WireGuard on the box**, if you'd rather have no coordination service: `sudo apt install wireguard`, `wg genkey | tee server.key | wg pubkey > server.pub`, a `/etc/wireguard/wg0.conf` with the server key and one `[Peer]` per device, `systemctl enable --now wg-quick@wg0`, and forward exactly one UDP port on the router to the box. The phone side is a QR code.
+
+**Make the DNS filter stick**: on the router, a NAT rule redirecting all LAN traffic to destination port 53 → the box; devices with hardcoded DNS (TVs, some IoT) end up filtered anyway. Block outbound 853 (DNS-over-TLS) from the IoT VLAN for the same reason.
+{{% /deep %}}
+
 {{< tiers
   t0="Tailscale on every device you own. Ten minutes. This alone lets you reach a laptop at home from anywhere, privately."
   t1="The small box joins the mesh and becomes the always-on door to everything else running on it."

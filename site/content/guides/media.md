@@ -41,6 +41,22 @@ Streaming subscriptions you choose to keep — nothing here stops you. The point
 - **Plex vs Jellyfin**, honestly: Plex has slicker apps and a working remote-access story out of the box, at the cost of a required account and features moving behind a subscription over time. Jellyfin has no account, no telemetry, and remote access through your own VPN.
 {{% /deep %}}
 
+
+{{% deep title="The commands" %}}
+**Hardware transcoding on an Intel box** (the kit has the `/dev/dri` lines commented out):
+
+```
+sudo apt install -y intel-media-va-driver-non-free vainfo
+vainfo | head        # lists the codecs the GPU can encode/decode
+```
+
+Uncomment `devices: [/dev/dri:/dev/dri]` in the Jellyfin kit, `docker compose up -d`, then Dashboard → Playback → Transcoding → *Intel QuickSync (QSV)* (or *VAAPI*), device `/dev/dri/renderD128`, and tick the codecs `vainfo` listed.
+
+**Ripping your own discs** on Linux: `makemkvcon mkv disc:0 all ~/rips/` for the lossless MKV, then `HandBrakeCLI -i in.mkv -o out.mkv --preset "H.265 MKV 1080p30"` to shrink it. Name the output as the library layout expects and Jellyfin fills in the rest.
+
+**Remote watching** without opening anything: Jellyfin on the Tailscale HTTPS address works in every Jellyfin app; for a TV at a relative's house, install Tailscale on their streaming box too.
+{{% /deep %}}
+
 {{< tiers
   t0="Jellyfin on the computer you have, pointed at the music and video you already own. A streaming stick you control instead of the TV's built-in apps, and the TV's network disconnected."
   t1="Jellyfin on the small box, running all the time; an antenna tuner for live TV."
