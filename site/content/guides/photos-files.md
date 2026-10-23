@@ -28,6 +28,18 @@ Every major provider has an export: Google Takeout, Apple's Data and Privacy por
 
 Off-site backup space, encrypted on your side (see [Backups](/guides/backups/)). That's all.
 
+
+{{% deep %}}
+## Under the hood
+
+- **Immich** is four containers: the server, a machine-learning worker (CLIP for text search, a face-recognition model), PostgreSQL with a vector extension, and Redis/Valkey. Budget 4 GB of RAM; the ML worker can run on a different, faster machine ("remote machine learning") if your box is a Pi. Hardware transcoding of video uses VAAPI/QuickSync on Intel — pass `/dev/dri` into the server container.
+- **Importing a Google Takeout** is the one hard part: Takeout strips dates and locations into JSON sidecars next to the files. Use `immich-go`, which reads the Takeout zips directly and reattaches dates, albums and favourites. For iCloud, export from the Photos app with "unmodified originals" plus IPTC-as-XMP, or request an export at privacy.apple.com.
+- **Storage layout.** Point `UPLOAD_LOCATION` at the big drive and turn on Immich's *storage template* so files land in human-readable `YYYY/MM/` folders — your library survives even if Immich doesn't.
+- **Phone backup from anywhere** works by giving the app your Tailscale HTTPS address instead of a LAN IP (see the [box page](/box/#4-reach-it-from-anywhere-with-https-with-nothing-exposed)). Background upload on iOS is best-effort; open the app occasionally.
+- **Alternatives**: PhotoPrism (single Go binary, strong search, slower development), Nextcloud Memories (if you're running Nextcloud anyway), or just Syncthing folders if you don't need faces and maps.
+- **Update discipline**: Immich moves fast and announces breaking changes in release notes. Read them before `docker compose pull`; keep the database in the backup plan.
+{{% /deep %}}
+
 {{< tiers
   t0="Export everything, keep it on an external drive and a second one, and use Syncthing between your own devices. Cancel the storage tier you were paying for."
   t1="Immich or a NAS app on the small box. Phones back up automatically when they're home on Wi-Fi."

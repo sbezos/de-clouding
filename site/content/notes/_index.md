@@ -7,4 +7,8 @@ The rest of this site is written for any budget. This section is different: it's
 
 Each note follows the same shape: **symptom → cause → fix → how to make it stick**. Commands are real and were run; versions are stated because they matter. Scripts referenced here live in the [`lab/`](https://github.com/sbezos/de-clouding/tree/main/lab) folder of the site's repo.
 
+{{% easy %}}
+*These notes are deep by nature — flip the switch at the top to **Dig deep** if the rest of the site has been hiding the specifics from you.*
+{{% /easy %}}
+
 If one of these saved you time, or you found a better way, [open an issue](https://github.com/sbezos/de-clouding/issues).

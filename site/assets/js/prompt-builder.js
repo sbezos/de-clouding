@@ -67,6 +67,12 @@
     out.value = lines.join('\n');
   }
 
+  // In "Dig deep" mode, assume fluency unless the reader says otherwise.
+  try {
+    if (document.documentElement.getAttribute('data-depth') === 'deep') {
+      var fl = form.querySelector('input[name="comfort"][value="fluent"]'); if (fl) fl.checked = true;
+    }
+  } catch (e) { /* fine */ }
   form.addEventListener('change', build);
   form.addEventListener('input', build);
   build();

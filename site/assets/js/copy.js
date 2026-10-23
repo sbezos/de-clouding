@@ -26,3 +26,21 @@ document.addEventListener('click', function (e) {
     document.body.removeChild(ta);
   }
 });
+
+// Easy mode / Dig deep switch. Preference lives in this browser only.
+(function () {
+  var html = document.documentElement;
+  function paint() {
+    var d = html.getAttribute('data-depth') === 'deep' ? 'deep' : 'easy';
+    document.querySelectorAll('[data-depth-set]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-depth-set') === d)); });
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-depth-set]');
+    if (!b) return;
+    var d = b.getAttribute('data-depth-set') === 'deep' ? 'deep' : 'easy';
+    html.setAttribute('data-depth', d);
+    try { localStorage.setItem('declouding-depth', d); } catch (_) {}
+    paint();
+  });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', paint); else paint();
+})();

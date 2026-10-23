@@ -27,6 +27,18 @@ The domain name (yearly) and the mailbox (a few dollars a month, or free tiers a
 
 All the encrypted providers have import tools that pull your old mail across. Keep the old address alive for a year forwarding to the new one; you'll find accounts you forgot. Change the important logins first: bank, government, the password manager.
 
+
+{{% deep %}}
+## Why self-hosting mail fails, and how to own it anyway
+
+- **Deliverability is reputation.** Receiving providers score the sending IP and domain: SPF, DKIM and DMARC records must be right, the IP needs a matching reverse-DNS name, residential IP ranges are blocked on port 25 outright, and new IPs start with no reputation at all. You can do everything correctly and still land in spam for months.
+- **Own the address properly**: register the domain at a registrar that is *not* your mail provider, point MX records at the provider, publish SPF/DKIM/DMARC as they instruct. Switching providers later is "change MX, import mail, update DKIM" — an afternoon.
+- **Providers, by trade-off**: Proton (mailbox encrypted at rest with your key; IMAP only via its Bridge app), Tuta (same idea, own protocol, no IMAP), Fastmail (not end-to-end, but excellent IMAP/JMAP, CalDAV and CardDAV), mailbox.org and Migadu (cheap, standards-based, per-domain pricing). Read what each can and cannot read about your mail; they publish it.
+- **Keep your own archive.** Even with a provider, mirror the mailbox to a local Maildir with `mbsync` (isync) or `imapsync` on a schedule, and let the backup kit sweep it up. Now the provider holds a copy, not *the* copy.
+- **Calendar and contacts** are easy to self-host even when mail isn't: Radicale or Baïkal on the box speak CalDAV/CardDAV; iOS and macOS connect natively, Android via DAVx⁵.
+- **Aliases**: SimpleLogin or addy.io (or Proton's built-in aliases) give every website its own address, so a leaked list points at one alias you can kill.
+{{% /deep %}}
+
 {{< tiers
   t0="This whole guide is a tier 0 move. Domain plus encrypted mailbox, nothing to buy."
   t1="Optionally: self-host your *calendar and contacts* (Radicale, Baïkal, or Nextcloud) on the small box, and keep only mail with the provider."

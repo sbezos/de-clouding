@@ -48,6 +48,20 @@ Every console maker offers parental controls — and the log of when and what yo
 
 Online play on Nintendo, Xbox and PlayStation networks needs their subscription; local and same-couch multiplayer doesn’t. The service-games stay service-games. Everything else — the library, the world, the rules — can be yours.
 
+
+{{% deep %}}
+## Under the hood
+
+- **Minecraft server flavours**: Paper (fast, plugin ecosystem) or Fabric (mods) for Java; Bedrock Dedicated Server for a pure Bedrock household. Keep `online-mode=true` (accounts are verified) and `enforce-whitelist=true`. The [kit](/box/#kit-minecraft) ships this way.
+- **Consoles and phones on a Java server**: Geyser translates Bedrock clients to Java and Floodgate lets them join without a Java account. Consoles additionally refuse custom server addresses; **BedrockConnect** works around it by pointing the console's DNS at a small server that presents your server in the "featured" list — you can self-host that too.
+- **Friends from other houses**, safest first: share the box into their Tailscale account (one invite, one app install at their end); a $5 rented box running WireGuard to your home that forwards only the game port, so your home IP stays private; or open exactly 25565 with the allow-list on and updates automatic — the itzg container runs as an unprivileged user, which limits the blast radius. Never open it with the allow-list off.
+- **Other servers that are free to run**: Terraria (TShock), Valheim, Satisfactory, Factorio headless, Luanti. Most are a one-container compose file like the kit.
+- **Own-your-games mechanics**: GOG and itch.io downloads have no DRM; Steam Families shares a library across accounts with per-child parental PINs; a Steam Deck plays offline.
+- **Streaming your own PC**: Sunshine uses the PC's hardware encoder (NVENC, QuickSync, AMF); Moonlight runs on Apple TV, Android TV, Fire TV, Steam Deck, a Pi or an old laptop. Wire the TV end with Ethernet for latency.
+- **Rules at the network edge**: AdGuard Home client schedules or your router's per-device schedules for bedtime; vendor family tools (Microsoft Family Safety, PlayStation Family, Nintendo's parental-controls app) for spending caps only — those live in their clouds, so give them the one job.
+- **Spending**: buy Robux and V-Bucks as gift cards instead of saving a card on the account; enable purchase PINs where offered.
+{{% /deep %}}
+
 {{< tiers
   t0="Buy the five games they actually play, DRM-free or on cartridge; let the rotating catalogs lapse; set spending limits; have the battle-pass conversation. Zero hardware."
   t1="A Minecraft or Luanti server on the small box, friends-only. A DNS filter and router schedules for bedtime."

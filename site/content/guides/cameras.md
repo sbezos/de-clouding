@@ -23,6 +23,18 @@ Nothing, unless you want cloud-based push alerts from a vendor. Remote viewing g
 
 A caution: cameras are the one category where **network isolation matters most**. Put them on a segment that cannot reach the internet; many cheap cameras have poor security, and you don't want them calling anyone.
 
+
+{{% deep %}}
+## Under the hood
+
+- **Frigate** takes RTSP streams, runs object detection (people, cars, packages) on a cheap accelerator — a Coral USB/M.2 TPU, OpenVINO on an Intel iGPU, or the Hailo module on a Pi 5 — records events or 24/7 to local disk, and plugs into Home Assistant. Use each camera's low-resolution sub-stream for detection and the main stream for recording.
+- **Camera picks**: anything with ONVIF/RTSP and the cloud features switched off — Reolink, Amcrest, Dahua and Hikvision all qualify; disable P2P/UID in the camera's settings. UniFi Protect is the appliance route if you're already on that gear. Local-recording doorbells exist (Reolink's PoE doorbell, Amcrest AD410, UniFi's); most others are cloud-only.
+- **Storage math**: a 5 MP stream at 4–6 Mbps is roughly 2 GB per hour, so four cameras recording 24/7 eat about 200 GB a day. Record on motion/events unless you have the disks.
+- **Network**: cameras on a VLAN with no internet access; only the Frigate host (or a firewall rule) may reach them. Cheap cameras have a long history of calling home and of unpatched vulnerabilities — isolation makes that irrelevant.
+- **Remote viewing**: over the mesh VPN only. Frigate has authentication now, but it was designed to live behind something; don't publish it.
+- **Night and weather**: PoE cameras over Wi-Fi ones every time — power and data in one cable, no battery, no dropouts.
+{{% /deep %}}
+
 {{< tiers
   t0="If you already own cloud cameras, check whether they support local recording to a memory card or a local hub and turn off the subscription. Otherwise, wait for tier 1."
   t1="One or two local-recording cameras plus Frigate on the small box, with an accelerator if you want smart detection."

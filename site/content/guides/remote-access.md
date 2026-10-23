@@ -26,6 +26,17 @@ Once you have more than a handful of smart devices and cameras, put them on a **
 
 With Tailscale: a free account for the introduction service, carrying no data of yours. With WireGuard on your own router: nothing.
 
+
+{{% deep %}}
+## Under the hood
+
+- **Tailscale** is WireGuard with a coordination server that introduces your devices to each other and hands out keys. Traffic is end-to-end encrypted device-to-device; when NAT traversal fails it bounces through a DERP relay that carries ciphertext it can't read. MagicDNS gives every device a name; ACLs restrict who can reach what; a *subnet router* on the box lets you reach non-Tailscale things at home (the printer, the TV box). `tailscale serve` publishes a local service over private HTTPS; its sibling *Funnel* makes it public — don't use Funnel for anything on this site. **Headscale** is a self-hosted replacement for the coordination server if you want zero third parties.
+- **Plain WireGuard** on your router (UniFi, OPNsense/pfSense, MikroTik, many consumer routers, or the box itself) is the no-company option. It needs one open UDP port and a dynamic-DNS name — and that is the acceptable exception to "nothing exposed": WireGuard doesn't answer unauthenticated packets at all, so a scan sees nothing.
+- **VLANs**: an IoT network with internet but no path to your computers; a camera network with neither; firewall rules that allow connections *from* your main network *into* those and only replies back. Most prosumer routers do this; most ISP routers don't.
+- **DNS**: AdGuard Home or Pi-hole on the box as the network's DNS, with encrypted (DoH/DoT) upstreams; per-device schedules; and a router rule redirecting all port-53 traffic to it, so devices with hardcoded DNS can't bypass the filter.
+- **Switch off**: UPnP (devices punching their own holes), WPS, and any "DMZ host" setting. Check your router's admin page isn't reachable from the WAN side.
+{{% /deep %}}
+
 {{< tiers
   t0="Tailscale on every device you own. Ten minutes. This alone lets you reach a laptop at home from anywhere, privately."
   t1="The small box joins the mesh and becomes the always-on door to everything else running on it."

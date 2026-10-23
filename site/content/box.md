@@ -86,3 +86,13 @@ Walk me through the remaining kits one at a time, waiting for me to paste the ou
 ---
 
 Everything here is one file per service on purpose: no installer, no magic, nothing that can break all at once. If a kit stops working because a project changed its compose format, [open an issue](https://github.com/sbezos/de-clouding/issues) and it gets fixed for everyone.
+
+
+{{% deep title="Operating the box" %}}
+- **Updates**: in a kit's folder, `docker compose pull && docker compose up -d`. Do it monthly, read the release notes for Immich and Home Assistant first, and don't run auto-updaters like Watchtower against databases you care about.
+- **Docker and your firewall**: Docker publishes ports by editing iptables directly and bypasses `ufw`. With the router closed that only matters on your own LAN, but if you want host-level control, bind services to the Tailscale interface or `127.0.0.1` and publish them with `tailscale serve`.
+- **Boot**: `restart: unless-stopped` plus Docker's own service means everything returns after a power cut without you. Put the box on a small UPS anyway; databases dislike hard power loss.
+- **Names**: give the box a DHCP reservation on the router and use its hostname everywhere (or the MagicDNS name over Tailscale), never a bare IP in the phone apps.
+- **Hardware transcoding** for Jellyfin and Immich on an Intel box: uncomment the `/dev/dri` lines and install `intel-media-va-driver-non-free`. A Pi has no equivalent; it'll direct-play most files and struggle to transcode.
+- **One thing per kit, one folder per kit** is the design. When something breaks, `docker compose logs --tail=100` in that folder is the whole debugging surface.
+{{% /deep %}}

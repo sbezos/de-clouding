@@ -24,6 +24,18 @@ The usual worry is "do I have to throw out my smart speakers?" No:
 
 Possibly nothing. If you keep vendor speakers, you keep that vendor's voice service for the listening part only. Some devices (certain thermostats, locks, robot vacuums) only work via their cloud — Home Assistant's device list tells you which before you buy.
 
+
+{{% deep %}}
+## Under the hood
+
+- **Which Home Assistant**: *HAOS* (the appliance: runs on a Pi, mini PC or VM, includes the add-on store and supervisor) is the one to recommend; *Container* is fine on the box but has no add-ons; *Core* is for people who enjoy Python environments. The [box kit](/box/#kit-home) is Container to get you started.
+- **Local protocols win**: Zigbee (a $30 coordinator stick with ZHA or Zigbee2MQTT), Z-Wave (Z-Wave JS), Thread/Matter (needs a border router — Home Assistant's own radio or an Apple/Google hub), and Wi-Fi devices with a local API: ESPHome, Tasmota, Shelly, WLED. Devices that need their cloud are listed as such in Home Assistant's integration docs — check before buying.
+- **Fully local voice** is a pipeline: wake word (openWakeWord / microWakeWord on the satellite), speech-to-text (Whisper, or the lighter Speech-to-Phrase), intent handling, optional LLM for natural language (the Ollama integration), text-to-speech (Piper). A mini PC runs the small variants; a GPU makes Whisper instant.
+- **Keeping Alexa or Google as the microphone**: Home Assistant Cloud (Nabu Casa, a few dollars a month, funds the project) is the easy bridge. The self-hosted alternative needs an internet-reachable endpoint; do it through a small rented relay box so nothing at home is exposed, not by opening ports.
+- **Network**: put IoT devices on their own VLAN with no route to your computers; run an mDNS reflector so discovery works across it; give fixed addresses to anything you'll automate.
+- **Backups**: Home Assistant makes its own backup archives on a schedule — send them to the box or NAS so the backup kit sweeps them off-site.
+{{% /deep %}}
+
 {{< tiers
   t0="Install Home Assistant on an old laptop or in a virtual machine on your computer to try it. Start turning off cloud features on devices that support local control."
   t1="This is tier 1's natural home: a Raspberry Pi or mini PC running Home Assistant 24/7, plus a $30 Zigbee/Z-Wave USB stick to free devices from their hubs."

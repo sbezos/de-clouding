@@ -1,0 +1,5 @@
+{{- /* Usage (markdown inside): {{% deep %}} … {{% /deep %}}  or  {{% deep title="…" %}} — shown only in "Dig deep" mode */ -}}
+<div class="depth depth-deep">
+  <p class="depth-label">{{ with .Get "title" }}{{ . }}{{ else }}Digging deeper{{ end }}</p>
+  {{ .Inner }}
+</div>

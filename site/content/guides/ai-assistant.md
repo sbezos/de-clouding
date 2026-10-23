@@ -31,6 +31,18 @@ This changes monthly, so ask the assistant (prompt below) to check current optio
 
 A hosted assistant for the hard problems, if you want one — ideally under a paid plan whose terms say your conversations aren't used for training. Read that line before you rely on it.
 
+
+{{% deep %}}
+## Under the hood
+
+- **Size vs memory**: at the usual 4-bit quantization (`Q4_K_M` GGUF) a model needs roughly 0.6 bytes per parameter plus room for context — about 5 GB for an 8B model, 9 GB for 14B, 18–20 GB for a 27–32B. Speed is mostly memory bandwidth: tokens per second ≈ bandwidth ÷ model size. That's why a Mac mini's unified memory punches above its weight and why a GPU's VRAM bandwidth makes 30B models conversational.
+- **Runners**: Ollama (llama.cpp underneath, easiest), llama.cpp's own server (most control), LM Studio (friendliest desktop app), vLLM (GPU, many users at once). **Front-ends**: Open WebUI adds the chat page, multiple users, document upload with retrieval, and optional web search — point it at Ollama and reach it from your phone over the mesh VPN.
+- **Licenses matter**: Apache-2.0 and MIT weights are yours without conditions; Llama's community license and Gemma's terms have use restrictions. Read the model card.
+- **The hybrid, done right**: route by sensitivity, not by laziness. Anything personal, medical, legal or about your household goes local; the hard reasoning problem goes to the hosted model. On the hosted side, paid API access and team/business plans typically carry no-training terms that consumer chat plans don't — check the exact page.
+- **GPUs, honestly**: a 16 GB card runs 12–14B models at speed; 24 GB (a used RTX 3090 is the classic value pick) runs 27–32B at 4-bit. Idle power matters more than peak — a GPU box at rest still draws a fridge's worth.
+- **Beyond chat**: Whisper for speech-to-text and Piper for text-to-speech make a local voice assistant; vision-language models let your photo library be searched by description; Home Assistant can use your local model as its conversation agent.
+{{% /deep %}}
+
 {{< tiers
   t0="LM Studio or Ollama on the laptop you own. A 4–8B model answers in a few seconds. Nothing leaves the room."
   t1="Ollama on the small box so it's always available, slowly, to every device — or the box acts as the front door to your laptop when it's on."

@@ -23,6 +23,19 @@ Off-site storage from a company — a plain storage bucket from any of the big o
 
 Tools that do this well and are free: restic, Kopia, Borg (Linux/Mac), and the built-in encrypted backup features of most NAS boxes.
 
+
+{{% deep %}}
+## How the good version actually works
+
+- **restic** and **Kopia** both encrypt on your machine before anything leaves (restic: AES-256 with a key derived from your passphrase; Kopia: AES-256-GCM or ChaCha20). The storage provider sees opaque blobs and a size. Both do content-defined chunking, so a 50 GB photo library that changes by 200 MB uploads 200 MB.
+- **Where to point it.** Any S3-compatible bucket (Backblaze B2, Wasabi, Cloudflare R2, AWS S3, Hetzner Storage Box over SFTP, rsync.net). Rough cost: $5–7 per TB per month for the cheap ones. Do **not** use archive tiers (S3 Glacier, Deep Archive) with restic or Kopia — they need random reads of small chunks, and archive tiers charge and stall for exactly that.
+- **Ransomware-proof it.** Give the backup job a key that can write but not delete (B2 application key without `deleteFiles`; S3 Object Lock in compliance mode; or restic's `rest-server --append-only`). Then a compromised laptop can't erase its own backups.
+- **Retention**, as a policy not a habit: `restic forget --keep-daily 7 --keep-weekly 4 --keep-monthly 12 --prune`.
+- **The two checks that matter**: `restic check --read-data-subset=5%` monthly (actually reads a sample of the data back), and a real restore of one file each quarter: `restic restore latest --target /tmp/r --include /path/to/one/file`.
+- **Local copy** is for speed and for "I deleted the wrong folder"; the off-site copy is for fire, theft and ransomware. A NAS with ZFS or btrfs snapshots covers the first case almost for free.
+- If you'd rather not run this from a terminal, **Backrest** wraps restic in a web UI with schedules, retention and a restore browser — it's the [backups kit](/box/#kit-backups) on the box page.
+{{% /deep %}}
+
 {{< tiers
   t0="Back the laptop up to an external drive weekly (Time Machine / File History), and run a free encrypted backup tool to a cheap storage bucket for the irreplaceable folder — photos, documents."
   t1="The small box holds a copy of every device's files; it backs *itself* up, encrypted, to the bucket nightly."

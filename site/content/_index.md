@@ -15,3 +15,8 @@ This site is about closing that loop on your side. Keep the useful parts. Keep y
 3. **Copy the prompt** at the bottom of the page into Claude or another assistant and let it walk you through the move, one step at a time, with the safety rails already written in.
 
 That's it. Start with whichever one annoys you most. (Curious how the pieces fit? [Own the stack](/stack/) is the one-page model.)
+
+
+{{% deep title="If you're technical, start here instead" %}}
+Skip the hand-holding: [Own the stack](/stack/) is the model (five layers, a threat table), [Build the box](/box/) is the quick-start with compose kits, and the [Lab notes](/notes/) are the engineering log — GPU passthrough on a server with no ReBAR, Intel's oneAPI stack in a VM. The guides still carry the per-topic specifics in this mode; the game is the same either way.
+{{% /deep %}}

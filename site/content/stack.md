@@ -26,3 +26,18 @@ See the [budget tiers](/tiers/) for what each one costs and buys. Every guide on
 Some things are better done by someone else. Delivering email reliably. Keeping an off-site copy of your backups. Holding your domain name. The test isn't "did I avoid every company" — it's **can they read it, and can I leave?**
 
 The same files, two very different places: documents living in a Google Drive can be read, indexed and learned from. The same documents in an encrypted volume on AWS are held by a company that can't open them and that you can replace tomorrow. Both are "the cloud." Only one of them owns you. If the data is encrypted on your side and you can take it with you in an afternoon, you own the stack even when a server you don't own is in the loop.
+
+
+{{% deep title="The threat model, layer by layer" %}}
+"Privacy" is too vague to design against. Name the five things that actually go wrong and the layer that answers each:
+
+| What goes wrong | Example | Layer that fixes it |
+|---|---|---|
+| **The provider uses your data** — training, ads, "improving the service" | Photo scanning, mailbox indexing, chat logs as training data | Data (client-side encryption) and Model (local inference) |
+| **Breach or leak** at the provider | Credential dumps, misconfigured buckets | Data: encrypted with *your* key means a breach leaks noise |
+| **Legal process or policy** reaching your account | Subpoenas, geofence warrants, content scanning | Data at home or encrypted with your key; the provider can't hand over what it can't read |
+| **Lockout** | Automated account bans with no appeal, lost 2FA, a dead founder's shared account | Control: copies you hold, addresses you own, exports you've tested |
+| **Discontinuation or price change** | Sunset announcements, "we're moving to a subscription" | Compute and Network: the service is yours to keep running |
+
+Two phrases to read carefully in any provider's marketing: **"encrypted at rest"** means encrypted with *their* key (they can read it; it protects against a stolen disk, not against them). **"End-to-end encrypted"** or **"zero-knowledge"** means your key — the only kind that moves the Data layer to your side. Backups to a bucket with restic, Bitwarden's vault, Proton's mailbox: your key. Google Drive, iCloud Photos (without Advanced Data Protection), Dropbox: theirs.
+{{% /deep %}}

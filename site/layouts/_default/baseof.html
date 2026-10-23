@@ -6,6 +6,8 @@
   <title>{{ if not .IsHome }}{{ .Title }} — {{ end }}{{ site.Title }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
   <meta name="color-scheme" content="light dark">
+  <script>(function(){var d='easy';try{var q=new URLSearchParams(location.search).get('depth');var s=localStorage.getItem('declouding-depth');if(q==='deep'||q==='easy'){d=q;try{localStorage.setItem('declouding-depth',d)}catch(e){}}else if(s==='deep'||s==='easy'){d=s}}catch(e){}document.documentElement.setAttribute('data-depth',d)})()</script>
+  <noscript><style>.depth{display:block!important}.depth-switch{display:none!important}</style></noscript>
   <link rel="canonical" href="{{ .Permalink }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ "index.xml" | absURL }}">
   <meta property="og:site_name" content="{{ site.Title }}">
@@ -29,6 +31,10 @@
 <div class="sky"></div>
 <header class="site-header">
   <a class="brand" href="{{ "/" | relURL }}">{{ partial "logo.html" (dict "w" 36) }}<span>de-clouding</span></a>
+  <div class="depth-switch" role="group" aria-label="How much detail to show">
+    <button type="button" data-depth-set="easy" aria-pressed="true">Easy mode</button>
+    <button type="button" data-depth-set="deep" aria-pressed="false">Dig deep</button>
+  </div>
   <nav aria-label="Site">
     {{ range site.Menus.main }}
     <a href="{{ .URL }}"{{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }} aria-current="page"{{ end }}>{{ .Name }}</a>
@@ -40,6 +46,7 @@
 </main>
 <footer class="site-footer">
   <p>No ads, no affiliate links, no analytics, no backend, no web fonts. Nothing you type on this site leaves your browser.</p>
+  <p>The switch at the top changes how much detail every page shows: <em>Easy mode</em> is the plain-language version; <em>Dig deep</em> adds the specifics, commands and trade-offs. Your choice is remembered in this browser only.</p>
   <p>Text is <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>; the site's code is MIT. <a href="https://github.com/sbezos/de-clouding">Source and corrections on GitHub.</a></p>
 </footer>
 {{ $js := resources.Get "js/copy.js" | minify | fingerprint }}

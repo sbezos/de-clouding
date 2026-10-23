@@ -38,6 +38,7 @@ One-way doors in bootstrap: none destructive. Everything it makes can be deleted
 - Guides live in `site/content/guides/*.md`; front matter `weight` orders them, `replaces` is the card subtitle,
   `moves` is the layer-chip row. Two shortcodes: `{{< tiers t0=… t1=… t2=… t3=… >}}` and
   `{{< prompt title="…" >}}…{{< /prompt >}}`.
+- Two reading depths: wrap markdown in `{{% easy %}}…{{% /easy %}}` or `{{% deep %}}…{{% /deep %}}` (optional `title=`). The header switch sets `data-depth` on `<html>` (localStorage, `?depth=deep|easy` deep links); CSS does the rest. Default is Easy. Content outside either block shows in both.
 - Lab notes live in `site/content/notes/*.md`; referenced scripts go in `lab/<role>/`. No hostnames/IPs in either.
 - CSS/JS are in `site/assets/` and fingerprinted by Hugo, so caching never serves a stale stylesheet.
 - `site/content/start.md` + `assets/js/prompt-builder.js` is the in-browser prompt builder.

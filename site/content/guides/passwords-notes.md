@@ -31,6 +31,18 @@ Plain text files are the most future-proof format there is. Twenty years from no
 
 Nothing, unless you choose a hosted encrypted tier for convenience — which is fine, because encrypted on your side means the host can't read it.
 
+
+{{% deep %}}
+## Under the hood
+
+- **How Bitwarden's encryption works**: your vault key is derived on the device from the master password (Argon2id by default now, PBKDF2 historically) and the server only ever stores ciphertext. That is why the free hosted tier is an acceptable Tier 0 answer and why **Vaultwarden** — an independent Rust implementation of the server API — can run on a tiny box: it never sees a password either.
+- **Vaultwarden must be served over HTTPS**; the clients use the browser's WebCrypto, which refuses plain HTTP. Put it behind `tailscale serve` (private HTTPS, no open ports) or a reverse proxy with a certificate. After everyone has an account set `SIGNUPS_ALLOWED=false`, set an `ADMIN_TOKEN` (hashed with argon2) if you want the admin panel, and back up the `/data` directory — it's a SQLite file.
+- **Families**: Vaultwarden supports organizations and collections (shared vaults) and emergency access, so a partner can reach the vault if something happens to you.
+- **Passkeys** can be stored in Bitwarden-compatible vaults, which keeps them out of a single phone vendor's cloud.
+- **KeePassXC + Syncthing** is the zero-server route: one `.kdbx` file, synced device-to-device. If two devices edit at once Syncthing writes a `.sync-conflict` copy; KeePassXC can merge two databases.
+- **Notes**: Obsidian stores Markdown files, which is the most future-proof format there is; sync them with Syncthing or any file sync. Joplin encrypts end-to-end and syncs to WebDAV, Nextcloud or an S3 bucket. Both export to plain files.
+{{% /deep %}}
+
 {{< tiers
   t0="Bitwarden's free hosted tier plus Obsidian with notes synced by Syncthing. No server, no cost."
   t1="Vaultwarden and Joplin's sync target on the small box. Your vault never leaves the house."

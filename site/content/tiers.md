@@ -57,3 +57,12 @@ I am deciding how much to invest in moving my digital life off the cloud. Here i
 
 Work out: (1) what I pay per year today, (2) which of those services I could replace at zero hardware cost, (3) whether buying a small always-on machine would pay back within three years, and (4) a recommended tier with a specific, currently-available example of hardware at that tier and its approximate price — checking current prices rather than guessing. Be honest if the answer is "don't buy anything."
 {{< /prompt >}}
+
+
+{{% deep title="Hardware, specifically" %}}
+- **Tier 1 picks**: a 1-litre office PC (Dell OptiPlex Micro, Lenovo ThinkCentre Tiny, HP EliteDesk Mini) with an 8th-generation-or-newer Intel chip, 16 GB, and an NVMe drive — plentiful used, 8–12 W idle, QuickSync for video; or a current N100/N150 mini PC (7–10 W idle, fanless models exist); or a Raspberry Pi 5 8 GB on an NVMe HAT. Avoid microSD for anything that writes a database.
+- **Tier 2 picks**: a Mac mini with 24–32 GB unified memory (quiet, tiny, and the best cheap inference box per watt because of memory bandwidth); a mini PC with 64 GB; a 2–4 bay NAS from Synology, UGREEN or QNAP for the storage half; or a used workstation (Dell Precision, HP Z) if you want PCIe slots and don't mind the size.
+- **Tier 3 picks**: one used RTX 3090 (24 GB) is the value standard for 27–32B models; two of them for 70B-class at 4-bit. Expect 20–30 W idle *per GPU* on top of the system, and plan for noise and heat placement before buying a second one.
+- **Power math**: watts × 24 × 30 ÷ 1000 × your rate. At 15¢/kWh: 10 W ≈ $1.10/month, 40 W ≈ $4.30, 150 W ≈ $16. A $500 mini PC that replaces $40/month of subscriptions pays back in about 13 months including electricity; a $3,000 GPU box replacing the same $40 never does on money alone — it has to be worth it for other reasons, and that's fine.
+- **Drives**: one big drive plus the off-site backup is Tier 1-honest; mirrored drives (RAID 1 / ZFS mirror) are for *availability*, not backup — they faithfully mirror your deletions.
+{{% /deep %}}
