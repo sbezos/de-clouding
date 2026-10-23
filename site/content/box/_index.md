@@ -1,5 +1,7 @@
 ---
 title: "Build the box in an afternoon"
+layout: "single"
+url: "/box/"
 eyebrow: "Tier 1, start to finish"
 description: "A shopping list, three commands, and a kit for each room of the house. Nothing exposed to the internet. Copy, paste, done before dinner."
 ---
@@ -76,7 +78,9 @@ sudo tailscale serve status                     # shows the https://box.<your-ta
 
 The "+10000" rule is just a convention so every address can be worked out from the box's name — the [My box](/my-box/) page uses it to turn one hostname into links to everything. Repeat the pattern for any other kit you want over HTTPS. Use those `https://…ts.net` addresses in the phone apps. Nothing is reachable from the open internet; the router stays closed.
 
-## 5. Hand the rest to Claude
+## 5. Hand the rest to Claude — or let an agent do the afternoon
+
+If your assistant can run commands on the box (Claude Code, Claude in the desktop app), there's a [runbook written for it](/box/agent/): one line to paste, stop points where it asks you, nothing exposed. Otherwise, the chat version:
 
 {{< prompt title="Finish my Tier 1 box" >}}
 I'm building the "Tier 1 box" from de-clouding.com/box: a small always-on machine running Docker and Tailscale, with independent compose kits for each service and nothing exposed to the internet. My box: [mini PC or Raspberry Pi, RAM, OS version]. Kits I have running so far: [list, e.g. backups, dns, photos]. Kits I still want: [list]. Devices in the house: [phones, laptops, TVs, consoles]. Comfort with computers: [none / some / fluent].
