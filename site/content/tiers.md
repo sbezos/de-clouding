@@ -3,7 +3,7 @@ title: "Budget tiers"
 description: "Four budgets, from zero up. Most people should stop at the first or second one, and that's a win."
 ---
 
-All prices are rough, in US dollars, for used or entry-level gear. Electricity estimates assume about 15¢/kWh. Check current prices before buying anything; this page will drift.
+Prices in the prose are rough, in US dollars, for used or entry-level gear; the tables under each tier carry **current used-market prices**, refreshed weekly by a job on a machine at home from public eBay listings (the date is printed under each table). Nothing on this page links anywhere or earns anything. Electricity estimates assume about 15¢/kWh.
 
 ## Tier 0 — $0, no new hardware {#tier-0}
 
@@ -27,6 +27,8 @@ All prices are rough, in US dollars, for used or entry-level gear. Electricity e
 
 **Adds:** compute, the beginnings of model. **Good for:** people who want the smart-home and file pieces to just work without a laptop open. **Ready to build one?** [The box, in an afternoon](/box/) is the shopping list and the copy-paste kits.
 
+{{< parts tier="t1" >}}
+
 ## Tier 2 — a real home server {#tier-2}
 
 **About $600–1,500.** A mini PC with 32–64 GB of RAM plus a two-bay NAS, or a Mac mini (its shared memory makes it a surprisingly good box for 8–14 billion-parameter models), or a used workstation with room for drives.
@@ -37,6 +39,8 @@ All prices are rough, in US dollars, for used or entry-level gear. Electricity e
 
 **Adds:** real model + compute. **Good for:** households that want to retire most cloud subscriptions.
 
+{{< parts tier="t2" >}}
+
 ## Tier 3 — the hobby got serious {#tier-3}
 
 **$2,000 and up, with no ceiling.** A discrete GPU with 16–24 GB of memory (or more than one), lots of fast storage, maybe a rack.
@@ -45,6 +49,8 @@ All prices are rough, in US dollars, for used or entry-level gear. Electricity e
 - Idles at 60–150 W or more: $7–20/month before you've asked it anything.
 
 **Adds:** the full stack. **Good for:** you'll know if this is you. Nothing on this site assumes it.
+
+{{< parts tier="t3" >}}
 
 ## Does it save money?
 

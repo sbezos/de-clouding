@@ -15,7 +15,11 @@ Pick one:
 - **A used mini PC** — search for "mini PC N100 16GB" or any small-form-factor office PC with an 8th-generation-or-newer Intel chip, **16 GB of RAM** and a **500 GB+ SSD**. Typically $150–250 used. This is the better buy: x86 means every piece of software exists for it, and it idles at the power draw of a night light.
 - **A Raspberry Pi 5, 8 GB**, with the official power supply and an NVMe HAT or a USB SSD (don't run this off a microSD). About $120–160 all in. Everything below works; AI and camera detection will be slow.
 
-Plus: an **external USB drive** (a 4 TB one is around $100) for photos and media, and, if you'll do the smart home, a **$30 Zigbee USB stick**. Prices are rough and dated October 2026.
+Plus: an **external USB drive** (a 4 TB one is around $100) for photos and media, and, if you'll do the smart home, a **$30 Zigbee USB stick**.
+
+What those actually cost on the used market right now, no links attached:
+
+{{< parts tier="t1" >}}
 
 ## 2. Base (20 minutes)
 

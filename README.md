@@ -42,6 +42,7 @@ One-way doors in bootstrap: none destructive. Everything it makes can be deleted
 - Lab notes live in `site/content/notes/*.md`; referenced scripts go in `lab/<role>/`. No hostnames/IPs in either.
 - CSS/JS are in `site/assets/` and fingerprinted by Hugo, so caching never serves a stale stylesheet.
 - `site/content/start.md` + `assets/js/prompt-builder.js` is the in-browser prompt builder.
+- Parts tables (`{{< parts tier="t1" >}}`) render `site/data/parts.yaml` (the curation; `mine: true` = what Sal runs, not a recommendation) with `site/data/prices.json` (weekly used-market prices written by `tools/ebay_prices.py` via `tools/refresh-prices.sh` + systemd timer; see `tools/README-prices.md`). Numbers only — no links, no affiliate anything, by decision.
 - `/box/agent/` is the same procedure as a runbook for agents (Claude Code etc.): contract, STOP points, per-kit rules, verification. Keep it in lockstep with `/box/` and the kits.
 - `/box/` is the quick-start: shopping list, base commands, and one small `compose.yml` per room served raw from `site/static/kits/*.yml` (embedded on the page by the `kit` shortcode via `readFile`). Keep each kit independent; no installer.
 - `/my-box/` is the launcher: the user's box name lives in their browser (localStorage or `#fragment`), the page renders links into their own services (Tailscale HTTPS port = app port + 10000) and no-cors reachability pings. Per-page CSP via the `csp` front-matter param forbids connecting anywhere but `*.ts.net`. No backend. Phase 2 (live status) would be a read-only agent container with CORS for this origin — see `assets/js/mybox.js` header.
@@ -51,5 +52,5 @@ One-way doors in bootstrap: none destructive. Everything it makes can be deleted
 ## TODO before launch
 
 - `content/about.md`: author line; contact is GitHub Issues (no email by design).
-- Re-check prices in `content/tiers.md`; they're rough and dated Oct 2026.
+- Prose prices in `content/tiers.md` are rough; the tables carry live numbers once the weekly refresh runs (see `tools/README-prices.md`).
 - Decide `PRICE_CLASS` (default PriceClass_100 = NA/EU edges; set PriceClass_All for global before bootstrap `site`).

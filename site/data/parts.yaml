@@ -1,0 +1,191 @@
+# Curated hardware for the "Build a box" and "Budget tiers" pages.
+#
+# Each part is a search eBay understands, the conditions we accept, and a sanity band in USD.
+# tools/ebay_prices.py reads this file once a week on a machine at home, asks eBay's public
+# Browse API for current US fixed-price listings, throws out junk (parts-only, outside the band),
+# and writes site/data/prices.json. The pages show the numbers only — no links, no affiliate
+# anything; the site earns nothing. `fallback` is used until the first refresh has run.
+# `mine: true` marks gear the author actually runs; it is rendered as such, not as a recommendation.
+#
+# Condition ids (eBay): 1000 new · 2000 certified refurbished · 2010/2020/2030 excellent/very good/good
+# refurbished · 2500 seller refurbished · 3000 used.
+
+defaults:
+  cond: [3000, 2500, 2000, 2010, 2020, 2030]
+  exclude:
+    - for parts
+    - parts only
+    - as-is
+    - as is
+    - not working
+    - faulty
+    - no power
+    - box only
+    - bracket only
+    - lot of
+    - read description
+    - damaged
+    - cracked
+    - locked
+    - bios lock
+    - no ssd
+    - no hdd
+    - no ram
+    - barebones
+    - barebone
+    - no cpu
+
+tiers:
+  t1:
+    title: "Tier 1 — one small always-on box"
+    parts: [t1-optiplex-micro, t1-thinkcentre-tiny, t1-elitedesk-mini, t1-n100-mini, t1-pi5-8gb, t1-usb-4tb, t1-zigbee]
+  t2:
+    title: "Tier 2 — a real home server"
+    parts: [t2-macmini-m4-24, t2-minipc-64gb, t2-nas-2bay, t2-nas-4bay, t2-workstation, t2-hdd-8tb, t2-ram-ddr4-32]
+  t3:
+    title: "Tier 3 — the hobby got serious"
+    parts: [t3-rtx-3060-12, t3-rtx-3090, t3-rtx-a4000, t3-r740, t3-nvme-2tb, t3-ups-1500]
+
+parts:
+  # ---------- Tier 1 ----------
+  t1-optiplex-micro:
+    name: "Dell OptiPlex Micro — i5, 16 GB, SSD"
+    note: "7060/7070/7080 (8th–10th gen). One litre, 8–12 W idle, QuickSync for video."
+    q: "optiplex micro i5 16gb ssd"
+    band: [80, 280]
+    fallback: 150
+  t1-thinkcentre-tiny:
+    name: "Lenovo ThinkCentre M720q Tiny — 16 GB"
+    note: "Same idea as the OptiPlex; M920q and M70q are the siblings."
+    q: "thinkcentre m720q 16gb"
+    band: [80, 280]
+    fallback: 150
+  t1-elitedesk-mini:
+    name: "HP EliteDesk 800 G4 Mini — 16 GB"
+    note: "G4 or G5. The three 1-litre lines are interchangeable; buy whichever is cheapest this week."
+    q: "elitedesk 800 g4 mini 16gb"
+    band: [80, 280]
+    fallback: 150
+  t1-n100-mini:
+    name: "Mini PC, Intel N100/N150, 16 GB"
+    note: "Current, often fanless, 7–10 W idle. New is fine here; there's little used stock."
+    q: "mini pc n100 16gb"
+    cond: [1000, 2000, 2500, 3000]
+    band: [110, 260]
+    fallback: 180
+  t1-pi5-8gb:
+    name: "Raspberry Pi 5, 8 GB"
+    note: "Board only — add the official power supply and an NVMe HAT or a USB SSD, never a microSD."
+    q: "raspberry pi 5 8gb"
+    cond: [1000]
+    band: [70, 200]
+    fallback: 95
+  t1-usb-4tb:
+    name: "External USB drive, 4 TB"
+    note: "Photos, media and the backup staging area. One drive plus an off-site backup is Tier-1 honest."
+    q: "4tb external hard drive usb 3"
+    cond: [1000, 2000, 2500]
+    band: [55, 140]
+    fallback: 100
+  t1-zigbee:
+    name: "Zigbee USB stick (Sonoff Dongle Plus)"
+    note: "Only if you'll do the smart-home kit."
+    q: "sonoff zigbee 3.0 usb dongle plus"
+    cond: [1000]
+    band: [15, 45]
+    fallback: 30
+
+  # ---------- Tier 2 ----------
+  t2-macmini-m4-24:
+    name: "Mac mini M4, 24 GB"
+    note: "Unified memory makes it a quiet, tiny box for 8–14B models. Used and refurbished both fine."
+    q: "mac mini m4 24gb"
+    cond: [1000, 2000, 2010, 2020, 2030, 2500, 3000]
+    band: [500, 950]
+    fallback: 700
+  t2-minipc-64gb:
+    name: "Mini PC, Ryzen 7, 64 GB"
+    note: "The x86 alternative: more software, more RAM, a little more power."
+    q: "mini pc ryzen 7 64gb"
+    cond: [1000, 2000, 2500, 3000]
+    band: [350, 850]
+    fallback: 550
+  t2-nas-2bay:
+    name: "Synology DS224+ (2-bay NAS)"
+    note: "The storage half of Tier 2. UGREEN and QNAP 2-bays are equivalents. Drives sold separately."
+    q: "synology ds224+"
+    cond: [1000, 2000, 2500, 3000]
+    band: [230, 420]
+    fallback: 300
+  t2-nas-4bay:
+    name: "Synology DS923+ (4-bay NAS)"
+    note: "If photos and media will outgrow two drives."
+    q: "synology ds923+"
+    cond: [1000, 2000, 2500, 3000]
+    band: [420, 700]
+    fallback: 550
+  t2-workstation:
+    name: "Dell Precision 3650 Tower — i7"
+    note: "PCIe slots and drive bays: the upgrade path to Tier 3 without buying twice."
+    q: "dell precision 3650 tower i7"
+    band: [220, 650]
+    fallback: 400
+  t2-hdd-8tb:
+    name: "NAS hard drive, 8 TB (Seagate IronWolf)"
+    note: "Two for a mirror. WD Red Plus is the equivalent. Buy new or certified for drives."
+    q: "ironwolf 8tb"
+    cond: [1000, 2000, 2500]
+    band: [110, 230]
+    fallback: 160
+  t2-ram-ddr4-32:
+    name: "32 GB DDR4-3200 SO-DIMM"
+    note: "Takes a 16 GB mini PC to 32–48 GB for a bigger model or more containers."
+    q: "32gb ddr4 3200 sodimm"
+    cond: [1000, 2000, 2500, 3000]
+    band: [35, 95]
+    fallback: 60
+
+  # ---------- Tier 3 ----------
+  t3-rtx-3060-12:
+    name: "NVIDIA RTX 3060, 12 GB"
+    note: "The budget inference card: 12 GB runs 7–14B models comfortably and draws little."
+    q: "rtx 3060 12gb"
+    band: [160, 320]
+    fallback: 230
+    exclude: [water block, waterblock, backplate, shroud only, fan only]
+  t3-rtx-3090:
+    name: "NVIDIA RTX 3090, 24 GB"
+    note: "The value standard for 27–32B models; two for 70B-class at 4-bit. Mind heat and noise."
+    q: "rtx 3090 24gb"
+    band: [520, 950]
+    fallback: 720
+    exclude: [water block, waterblock, backplate, shroud only, fan only]
+  t3-rtx-a4000:
+    name: "NVIDIA RTX A4000, 16 GB"
+    note: "Single-slot, 140 W, workstation-quiet; fits in cases and power budgets a 3090 won't."
+    q: "rtx a4000 16gb"
+    band: [550, 1000]
+    fallback: 800
+    exclude: [bracket, shroud only, fan only]
+  t3-r740:
+    name: "Dell PowerEdge R740 (2× Xeon Gold)"
+    note: "This is what I run, and it is not a typical home recommendation: a rack server, loud, hungry, and happiest in a basement or garage. It is where the lab notes come from."
+    mine: true
+    q: "dell poweredge r740 gold"
+    band: [800, 2800]
+    fallback: 1400
+    exclude: [chassis only, no cpu, no memory, caddies only, rails only]
+  t3-nvme-2tb:
+    name: "NVMe SSD, 2 TB, Gen4"
+    note: "Model storage. A used model file loads from NVMe in seconds, from a hard drive in minutes."
+    q: "2tb nvme gen4 ssd"
+    cond: [1000, 2000, 2500]
+    band: [85, 200]
+    fallback: 130
+  t3-ups-1500:
+    name: "UPS, 1,500 VA pure sine (CyberPower CP1500PFCLCD)"
+    note: "Any 1,000–1,500 VA pure-sine unit with USB, so the box shuts down cleanly on its own."
+    q: "cyberpower cp1500pfclcd"
+    cond: [1000, 2000, 2500, 3000]
+    band: [110, 240]
+    fallback: 180
