@@ -9,8 +9,8 @@ Prices in the prose are rough, in US dollars, for used or entry-level gear; the 
 
 **You change who holds your data and on what terms.** Nothing to buy, a few hours of weekend.
 
-- Move email to your own domain (about $12/year) at a provider that encrypts your mailbox. Now the provider is replaceable.
-- Export your photos and files from the cloud drive and keep a copy on a drive you own; keep the cloud as a *second* copy, encrypted, or drop it.
+- Move email to your own domain (about $12/year) at a provider that encrypts your mailbox — Proton, if you want one name ([why](/good-company/#proton)). Now the provider is replaceable.
+- Export your photos and files from the cloud drive and keep a copy on a drive you own; keep the cloud as a *second* copy, encrypted on your side (Proton Drive does that for you), or drop it.
 - Switch to a password manager and notes app that store locally and sync without a company in the middle.
 - Try a small AI model on the laptop you already have. A machine with 16 GB of memory runs a useful 4–8 billion-parameter model today — slower than the hosted ones, and nothing leaves the room.
 - Connect your own devices to each other privately with a free mesh VPN.

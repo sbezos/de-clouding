@@ -14,6 +14,7 @@ Your password vault is the master key to everything else, and your notes are you
 ## Passwords
 
 - **Bitwarden** is open source and has a free hosted tier that's already end-to-end encrypted — a fine tier 0 answer.
+- **Proton Pass** is the other tier 0 answer: open source, end-to-end encrypted, free tier with unlimited logins and passkeys on every device. Hosted only — there's no server to run yourself — and it comes with the same account as Proton Mail ([why Proton](/good-company/#proton)).
 - **Vaultwarden** is a tiny self-hosted server that speaks the Bitwarden protocol, so the same apps work against your own box.
 - **KeePassXC** uses a single encrypted file and no server at all; sync it with Syncthing or your own file sync.
 
@@ -23,7 +24,7 @@ Every mainstream password manager exports to a standard file; import takes minut
 
 - **Obsidian** stores notes as plain text files on your device — no account needed — and syncs however your files sync.
 - **Joplin** is open source, encrypts end-to-end, and can sync through your own server or a file share.
-- **Standard Notes** if you want something simpler with encryption built in.
+- **Standard Notes** if you want something simpler with encryption built in (owned by Proton since 2024).
 
 Plain text files are the most future-proof format there is. Twenty years from now, you'll still be able to read them.
 

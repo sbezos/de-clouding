@@ -28,6 +28,8 @@ Every major provider has an export: Google Takeout, Apple's Data and Privacy por
 
 Off-site backup space, encrypted on your side (see [Backups](/guides/backups/)). That's all.
 
+If you also want a cloud copy of everyday files that stays handy from your phone, pick a drive that encrypts on your device before anything uploads, so the provider holds files it can't open. Proton Drive is the one this site names ([why](/good-company/#proton)); it's the same idea as the "encrypted volume" in [Own the stack](/stack/), without the setup.
+
 
 {{% deep %}}
 ## Under the hood

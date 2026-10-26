@@ -19,6 +19,8 @@ The de-clouding move for email is different: **own the address.** Register a dom
 - An address you keep for life, no matter who hosts it.
 - Calendar and contacts that sync to your phone with open standards, not a company's app.
 
+**If you want one answer:** Proton Mail, for its policies — the provider can't read your mail, a non-profit owns the company, and you can take your address and leave. [Why, and the catch.](/good-company/#proton) Tuta is the second answer.
+
 ## What you still rent
 
 The domain name (yearly) and the mailbox (a few dollars a month, or free tiers at some providers). This is the intended outcome, not a compromise.

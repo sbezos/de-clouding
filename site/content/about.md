@@ -12,7 +12,7 @@ I'm not selling anything here. I just think it's in society's interest to take o
 
 A few commitments:
 
-- **No ads, no affiliate links, no analytics.** If that ever changes it will say so on every page.
+- **No ads, no affiliate links, no referral codes, no analytics.** If that ever changes it will say so on every page. The few companies this site does name are on [Good company](/good-company/), with the reasons and the catch; none of them know.
 - **No product.** There is nothing to buy here. If something sellable ever grows out of it, it will be an openly published design, not a subscription.
 - **Every tier counts.** Changing your email provider is de-clouding. Nobody needs a server rack to belong here.
 - **Facts, not villains.** The guides describe what services *can* do with your data, based on their own terms, and let you decide how you feel about it.
