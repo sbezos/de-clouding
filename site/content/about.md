@@ -2,7 +2,7 @@
 title: "About"
 ---
 
-I'm Sal. I'm an electrical engineer by training and a patent attorney by trade, and I run a home lab because I like knowing where my data sleeps at night. Over a couple of years I moved my photos, files, mail, smart home, cameras, TV, and finally my AI assistant onto hardware I control. The hardest part wasn't the technology; it was figuring out what was *possible* and in what order. This site is the map I wish I'd had.
+I'm Sal Bezos. I'm an electrical engineer by training and a patent attorney by trade, and I run a home lab because I like knowing where my data sleeps at night. Over a couple of years I moved my photos, files, mail, smart home, cameras, TV, and finally my AI assistant onto hardware I control. The hardest part wasn't the technology; it was figuring out what was *possible* and in what order. This site is the map I wish I'd had.
 
 ## About the name
 
