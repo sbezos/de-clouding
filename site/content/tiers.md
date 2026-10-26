@@ -3,7 +3,7 @@ title: "Budget tiers"
 description: "Four budgets, from zero up. Most people should stop at the first or second one, and that's a win."
 ---
 
-Prices in the prose are rough, in US dollars, for used or entry-level gear; the tables under each tier carry **current used-market prices**, refreshed weekly by a job on a machine at home from public eBay listings (the date is printed under each table). Nothing on this page links anywhere or earns anything. Electricity estimates assume about 15¢/kWh.
+Prices are rough, in US dollars, for used or entry-level gear. The table under each tier names specific parts with estimates kept by hand, dated underneath. Nothing on this page links to a shop or earns anything. Electricity estimates assume about 15¢/kWh.
 
 ## Tier 0 — $0, no new hardware {#tier-0}
 
@@ -58,6 +58,17 @@ Often, but not always. Add up what you pay today for photo storage, cloud drive,
 
 **When it doesn't pay back:** if you'd only replace one or two cheap subscriptions; if your time is the scarce thing and you'd rather pay than maintain; if you need shared access for a large group spread across cities. In those cases, do Tier 0, take the privacy win, and skip the hardware with a clear conscience.
 
+## Buying used, without regret {#buying-used}
+
+Most of the hardware on this page is cheapest second-hand, because businesses replace office PCs and servers on a schedule, working or not. A few habits make that safe:
+
+- **Buy where returns are easy, and test everything the day it arrives** — not the day you need it. Refurbishers that sell off-lease business machines often include a warranty; local classifieds, university and government surplus sales, and homelab swap forums are good hunting grounds too.
+- **Prefer the boring models.** The big office-PC lines are everywhere, so spare parts, power adapters and how-to guides are easy to find.
+- **Read the listing for what's missing.** No power adapter, no drive, no RAM, "BIOS locked", "for parts": each makes a listing cheaper for a reason.
+- **Buy these new:** a drive that will hold the only copy of anything, UPS batteries, microSD cards and USB sticks (fakes are common), and power supplies of unknown history.
+- **Wipe it before it holds anything of yours.** Reset the firmware settings, reinstall the operating system, and pass on any machine with a firmware password the seller can't remove.
+- **Memory is the exception right now.** Prices have climbed steeply since late 2025 as memory makers shift capacity toward AI chips: DDR4 contract prices rose about 24% in the three months to October 2026, and the shortage is forecast to last into 2028 ([Guru3D, October 2026](https://www.guru3d.com/story/ddr4-memory-prices-now-also-rise-as-dram-supply-shortages-intensify-through-2028/)). Buy the RAM you need now rather than all you might want someday, and favour machines that already come with it.
+
 {{< prompt title="Help me pick a tier" >}}
 I am deciding how much to invest in moving my digital life off the cloud. Here is what I currently pay for monthly or yearly: [list subscriptions and prices]. Here are the devices I already own: [list]. My comfort with computers is [none / some / fluent]. I live in [country], and electricity costs me about [price] per kWh.
 
@@ -71,4 +82,30 @@ Work out: (1) what I pay per year today, (2) which of those services I could rep
 - **Tier 3 picks**: one used RTX 3090 (24 GB) is the value standard for 27–32B models; two of them for 70B-class at 4-bit. Expect 20–30 W idle *per GPU* on top of the system, and plan for noise and heat placement before buying a second one.
 - **Power math**: watts × 24 × 30 ÷ 1000 × your rate. At 15¢/kWh: 10 W ≈ $1.10/month, 40 W ≈ $4.30, 150 W ≈ $16. A $500 mini PC that replaces $40/month of subscriptions pays back in about 13 months including electricity; a $3,000 GPU box replacing the same $40 never does on money alone — it has to be worth it for other reasons, and that's fine.
 - **Drives**: one big drive plus the off-site backup is Tier 1-honest; mirrored drives (RAID 1 / ZFS mirror) are for *availability*, not backup — they faithfully mirror your deletions.
+{{% /deep %}}
+
+
+{{% deep title="Buying used, specifically" %}}
+**Test on arrival, inside the return window:**
+
+```
+sudo apt install -y memtest86+ smartmontools stress-ng lm-sensors
+
+sudo smartctl -a /dev/sda          # SATA drive: health, age, errors
+sudo smartctl -a /dev/nvme0        # NVMe: wear and errors
+sudo smartctl -t long /dev/sda     # long self-test; results: -l selftest
+
+stress-ng --cpu 0 --timeout 15m    # all cores, fifteen minutes…
+watch -n2 sensors                  # …temperatures, in a second terminal
+```
+
+Then reboot into MemTest86+ (the package adds it to the boot menu) and let it finish one full pass.
+
+- **Reading `smartctl`**: on a SATA drive, Reallocated_Sector_Ct, Current_Pending_Sector and Offline_Uncorrectable should all be 0, and Power_On_Hours is its age; on NVMe, Media and Data Integrity Errors should be 0 and Percentage Used is the wear — single digits means barely used.
+- **Temperatures**: an office mini PC that throttles or sits near 100 °C under load usually has dried thermal paste or a clogged fan — a twenty-minute fix, but find out before the return window closes.
+- **Graphics cards**: run a real load (a local model, a render) for half an hour and watch `nvidia-smi` for temperature, clocks and errors. Ex-mining cards are usually fine; fans and thermal pads are the parts that wear.
+- **Ex-corporate PCs**: set your own firmware password, update the firmware from the manufacturer's support site, and on Intel vPro machines disable or unprovision AMT (the built-in remote-management engine) in the MEBx menu — on some models it's Ctrl+P during boot.
+- **Memory compatibility**: servers take registered ECC modules (RDIMM or LRDIMM, never mixed); desktops and mini PCs take unbuffered DIMMs or SO-DIMMs. Everything runs at the slowest module's speed and the platform's limit; on a two-socket server, populate both CPUs' channels evenly.
+- **Servers** (the R740 class): check what's included — power supplies, rails, drive caddies (often sold separately), the remote-management licence (iDRAC Enterprise is what gives you the virtual console) — and plan for the noise before the price: a 2U server at idle is loud by home standards.
+- **Drives**: manufacturer-recertified drives come back tested and with a warranty; pulls from used machines are fine for scratch space, never for the only copy of anything.
 {{% /deep %}}

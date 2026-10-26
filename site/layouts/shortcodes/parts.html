@@ -1,40 +1,27 @@
-{{- /* Usage: {{< parts tier="t1" >}} — curated parts for one budget tier with this week's used-market prices. No links. */ -}}
+{{- /* Usage: {{< parts tier="t1" >}} — curated parts for one budget tier with rough, hand-checked prices. No links. */ -}}
 {{- $tierId := .Get "tier" -}}
-{{- $tier := index site.Data.parts.tiers $tierId -}}
-{{- $prices := site.Data.prices -}}
+{{- $data := site.Data.parts -}}
+{{- $tier := index $data.tiers $tierId -}}
 <div class="parts" id="parts-{{ $tierId }}">
 <table class="parts-table">
-  <thead><tr><th>Part</th><th>Good price</th><th>Typical</th></tr></thead>
+  <thead><tr><th>Part</th><th>Rough price</th></tr></thead>
   <tbody>
   {{- range $tier.parts -}}
-    {{- $id := . -}}
-    {{- $p := index site.Data.parts.parts $id -}}
-    {{- $pr := dict -}}
-    {{- with $prices.parts }}{{ with index . $id }}{{ $pr = . }}{{ end }}{{ end -}}
+    {{- $p := index $data.parts . -}}
     <tr{{ if $p.mine }} class="parts-mine"{{ end }}>
       <td><strong>{{ $p.name }}</strong>{{ if $p.mine }} <span class="parts-tag">what I run</span>{{ end }}{{ with $p.note }}<br><small>{{ . | markdownify }}</small>{{ end }}</td>
-      {{- with $pr.good -}}
-        <td class="parts-good">${{ . }}</td>
-        <td>${{ $pr.typical }}<br><small>{{ $pr.n }} listings</small></td>
-      {{- else -}}
-        <td class="parts-good">≈ ${{ $p.fallback }}</td>
-        <td><small>rough, until the first refresh</small></td>
-      {{- end -}}
+      <td class="parts-price">≈ ${{ lang.FormatNumber 0 $p.about }}</td>
     </tr>
   {{- end -}}
   </tbody>
 </table>
+{{- $asof := time.AsTime $data.as_of -}}
+{{- $age := div (sub now.Unix $asof.Unix) 86400 }}
 <p class="parts-asof">
-{{- with $prices.generated -}}
-  {{- $gen := time . -}}
-  {{- $age := div (sub now.Unix $gen.Unix) 86400 -}}
-  {{- if gt $age 21 -}}
-    Prices last refreshed <strong>{{ $gen.Format "January 2, 2006" }}</strong> — more than three weeks ago, so treat them as approximate.
-  {{- else -}}
-    <strong>Prices as of {{ $gen.Format "January 2, 2006" }}.</strong> “Good” is what a patient buyer pays this week — the cheaper quarter of US fixed-price listings, shipping included; “typical” is the middle. Junk listings (for parts, no RAM, locked) are filtered out. Nothing here is a quote or a link; search any marketplace with the part name.
-  {{- end -}}
+{{- if gt $age 183 -}}
+  These estimates are from <strong>{{ $asof.Format "January 2006" }}</strong>, more than six months ago — check current prices before you budget.
 {{- else -}}
-  Figures are rough estimates dated October 2026. A weekly job on a machine at home will replace them with real used-market prices; the date will appear here when it has.
+  Rough prices as of <strong>{{ $asof.Format "January 2006" }}</strong>, in US dollars: used or refurbished unless the note says to buy new. Estimates to budget with, not quotes — kept by hand, linked to nothing. Before you buy, read <a href="/tiers/#buying-used">Buying used</a>.
 {{- end -}}
 </p>
 </div>

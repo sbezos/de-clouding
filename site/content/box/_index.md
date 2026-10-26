@@ -17,7 +17,7 @@ Pick one:
 
 Plus: an **external USB drive** (a 4 TB one is around $100) for photos and media, and, if you'll do the smart home, a **$30 Zigbee USB stick**.
 
-What those actually cost on the used market right now, no links attached:
+Rough prices for the usual suspects, kept by hand, no links attached:
 
 {{< parts tier="t1" >}}
 

@@ -212,8 +212,8 @@ html[data-depth="deep"] .site-footer { border-top-style: dashed; }
 .parts { margin: 1rem 0 1.5rem; }
 .parts-table th:first-child, .parts-table td:first-child { white-space: normal; width: auto; }
 .parts-table td small { color: var(--muted); }
-.parts-good { font-weight: 800; white-space: nowrap; }
-.parts-table td:nth-child(3) { white-space: nowrap; }
+.parts-price { font-weight: 800; white-space: nowrap; text-align: right; }
+.parts-table th:nth-child(2) { text-align: right; white-space: nowrap; }
 .parts-mine td { background: color-mix(in srgb, var(--window) 14%, transparent); }
 .parts-tag { display: inline-block; font-size: .72rem; font-weight: 700; padding: .05rem .5rem; border-radius: 999px; background: var(--window); color: #16333a; vertical-align: middle; margin-left: .3rem; }
 .parts-asof { color: var(--muted); font-size: .88rem; }

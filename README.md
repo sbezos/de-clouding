@@ -42,7 +42,7 @@ One-way doors in bootstrap: none destructive. Everything it makes can be deleted
 - Lab notes live in `site/content/notes/*.md`; referenced scripts go in `lab/<role>/`. No hostnames/IPs in either.
 - CSS/JS are in `site/assets/` and fingerprinted by Hugo, so caching never serves a stale stylesheet.
 - `site/content/start.md` + `assets/js/prompt-builder.js` is the in-browser prompt builder.
-- Parts tables (`{{< parts tier="t1" >}}`) render `site/data/parts.yaml` (the curation; `mine: true` = what Sal runs, not a recommendation) with `site/data/prices.json` (weekly used-market prices written by `tools/ebay_prices.py` via `tools/refresh-prices.sh` + systemd timer; see `tools/README-prices.md`). Numbers only — no links, no affiliate anything, by decision.
+- Parts tables (`{{< parts tier="t1" >}}`) render `site/data/parts.yaml`: the curation, a rough `about` price per part and one `as_of` date for the file (`mine: true` = what Sal runs, not a recommendation). Kept by hand — re-check a few times a year and bump `as_of`; after six months the tables say so themselves. No feeds, no scraping, no links, no affiliate anything, by decision: an eBay price job was built and dropped because eBay's API licence forbids using its data to suggest prices (§9(5)) and the site won't depend on a marketplace anyway.
 - `/good-company/` is the only place the site recommends a company by name (currently Proton) and where people/creators doing the same work get credited. Rule: named for written policies, listed with the catch, plain links only — no referral codes, no affiliate anything — and anyone listed can ask out via an issue. Guides link to it with `/good-company/#proton` rather than repeating the argument.
 - `/box/agent/` is the same procedure as a runbook for agents (Claude Code etc.): contract, STOP points, per-kit rules, verification. Keep it in lockstep with `/box/` and the kits.
 - `/box/` is the quick-start: shopping list, base commands, and one small `compose.yml` per room served raw from `site/static/kits/*.yml` (embedded on the page by the `kit` shortcode via `readFile`). Keep each kit independent; no installer.
@@ -53,5 +53,5 @@ One-way doors in bootstrap: none destructive. Everything it makes can be deleted
 ## TODO before launch
 
 - `content/about.md`: author line; contact is GitHub Issues (no email by design).
-- Prose prices in `content/tiers.md` are rough; the tables carry live numbers once the weekly refresh runs (see `tools/README-prices.md`).
+- Prices in `content/tiers.md` and `site/data/parts.yaml` are rough estimates; re-check them by hand a few times a year.
 - Decide `PRICE_CLASS` (default PriceClass_100 = NA/EU edges; set PriceClass_All for global before bootstrap `site`).
