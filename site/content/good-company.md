@@ -27,6 +27,8 @@ Mail, calendar, encrypted file storage, a password manager, a VPN, a notes app (
 
 **Second answer:** Tuta, in Germany, makes the same kind of promise with a different design: it encrypts subject lines as well, and has no IMAP at all. The email guide lists the others.
 
+**Same list, from the other side.** In October 2026 Proton's own social account posted [four gadgets that replace four subscriptions](https://www.instagram.com/reel/De7eX6hkcLg/): Immich, a Kobo e-reader, a UGREEN NAS, and a $35 Raspberry Pi for ad blocking. Three were already here — Immich in [Photos & files](/guides/photos-files/), the NAS in [Budget tiers](/tiers/#tier-2), the Pi as the [tier 1 box](/tiers/#tier-1) that does the ad blocking and a good deal more — and the fourth is why the [media guide](/guides/media/) now covers books. Nobody coordinated this; it is just where the arithmetic leads.
+
 
 {{% deep title="Policies, with the receipts" %}}
 - **What is encrypted**, from Proton's [own page](https://proton.me/support/what-is-encrypted-within-protonmail): message bodies and attachments end-to-end or zero-access; subject lines and sender/recipient addresses "encrypted, but not end-to-end encrypted"; mail arriving from non-Proton senders without PGP is stored zero-access on arrival but was readable by the sender's provider on the way in.
