@@ -9,7 +9,7 @@ There are no referral codes or affiliate links on this page, no money moves in e
 
 ## Proton {#proton}
 
-Mail, calendar, encrypted file storage, a password manager, a VPN, a notes app (Standard Notes, which Proton bought in 2024) and a two-factor app, under one account at [proton.me](https://proton.me/). It is the name this site uses when a guide needs one for "a provider that encrypts your mailbox."
+Mail, calendar, encrypted file storage, a password manager, a VPN, a notes app (Standard Notes, which Proton bought in 2024) and a two-factor app, under one account at [proton.me](https://proton.me/). It is the name this site uses when a guide needs one for "a provider that encrypts your mailbox," and it is what I use for my own mail.
 
 **What earns it:**
 

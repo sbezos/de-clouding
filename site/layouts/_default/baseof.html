@@ -6,6 +6,7 @@
   <title>{{ if not .IsHome }}{{ .Title }} — {{ end }}{{ site.Title }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
   <meta name="color-scheme" content="light dark">
+  {{ if .Params.noindex }}<meta name="robots" content="noindex">{{ end }}
   {{ with .Params.csp }}<meta http-equiv="Content-Security-Policy" content="{{ . }}">{{ end }}
   <script>(function(){var d='easy';try{var q=new URLSearchParams(location.search).get('depth');var s=localStorage.getItem('declouding-depth');if(q==='deep'||q==='easy'){d=q;try{localStorage.setItem('declouding-depth',d)}catch(e){}}else if(s==='deep'||s==='easy'){d=s}}catch(e){}document.documentElement.setAttribute('data-depth',d)})()</script>
   <noscript><style>.depth{display:block!important}.depth-switch{display:none!important}</style></noscript>
