@@ -17,7 +17,7 @@ LOG_BUCKET="${LOG_BUCKET:-${BUCKET}-logs}"
 REGION="us-east-1"                            # ACM certs for CloudFront MUST be in us-east-1
 PROFILE="${AWS_PROFILE:-default}"
 DEPLOY_USER="${DEPLOY_USER:-de-clouding-deploy}"
-ALARM_EMAIL="${ALARM_EMAIL:-}"                # set to get a $10/month billing alarm email
+ALARM_EMAIL="${ALARM_EMAIL:-}"                # set to get an email when CloudFront charges pass $ALARM_USD in a month
 ALARM_USD="${ALARM_USD:-10}"
 PRICE_CLASS="${PRICE_CLASS:-PriceClass_100}"  # NA+EU edges only (cheapest). PriceClass_All for global.
 # ---------------------------------------------------------------------------
@@ -168,14 +168,19 @@ EOF
   fi
 
   if [ -n "$ALARM_EMAIL" ] && [ -z "${ALARM_MADE:-}" ]; then
-    echo "== Billing alarm (\$$ALARM_USD/month). NOTE: 'Receive Billing Alerts' must be enabled once in the"
-    echo "   Billing console preferences or the EstimatedCharges metric never populates."
+    echo "== CloudFront billing alarm (\$$ALARM_USD/month). NOTE: 'Receive Billing Alerts' must be enabled once in"
+    echo "   the Billing console preferences or the EstimatedCharges metric never populates."
+    # Scoped to CloudFront on purpose: Currency alone is the WHOLE account's month-to-date bill, which on an
+    # account with backups and VPSs crosses \$10 in days and pages forever. The site's cost risk is traffic,
+    # and traffic is CloudFront. Account-wide spend belongs to an AWS Budget, not to this alarm.
     topic=$(aws sns create-topic --name "${BUCKET}-billing" | jq -r .TopicArn)
     aws sns subscribe --topic-arn "$topic" --protocol email --notification-endpoint "$ALARM_EMAIL" >/dev/null
     aws cloudwatch put-metric-alarm --alarm-name "${BUCKET}-billing-${ALARM_USD}usd" \
-      --namespace AWS/Billing --metric-name EstimatedCharges --dimensions Name=Currency,Value=USD \
+      --alarm-description "CloudFront charges this month above \$${ALARM_USD} — the site is getting real traffic" \
+      --namespace AWS/Billing --metric-name EstimatedCharges \
+      --dimensions Name=ServiceName,Value=AmazonCloudFront Name=Currency,Value=USD \
       --statistic Maximum --period 21600 --evaluation-periods 1 --threshold "$ALARM_USD" \
-      --comparison-operator GreaterThanThreshold --alarm-actions "$topic"
+      --comparison-operator GreaterThanThreshold --treat-missing-data notBreaching --alarm-actions "$topic"
     save ALARM_MADE 1
     echo "   Confirm the SNS subscription email."
   fi
