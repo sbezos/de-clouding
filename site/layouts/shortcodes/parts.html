@@ -10,7 +10,7 @@
     {{- $p := index $data.parts . -}}
     <tr{{ if $p.mine }} class="parts-mine"{{ end }}>
       <td><strong>{{ $p.name }}</strong>{{ if $p.mine }} <span class="parts-tag">what I run</span>{{ end }}{{ with $p.note }}<br><small>{{ . | markdownify }}</small>{{ end }}</td>
-      <td class="parts-price">≈ ${{ lang.FormatNumber 0 $p.about }}</td>
+      <td class="parts-price">{{ if eq (printf "%T" $p.about) "string" }}<span class="parts-check">{{ $p.about }}</span>{{ else }}≈ ${{ lang.FormatNumber 0 $p.about }}{{ end }}</td>
     </tr>
   {{- end -}}
   </tbody>

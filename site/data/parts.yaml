@@ -18,7 +18,7 @@ tiers:
     parts: [t2-macmini-m4-24, t2-minipc-64gb, t2-nas-2bay, t2-nas-4bay, t2-workstation, t2-hdd-8tb, t2-ram-ddr4-32]
   t3:
     title: "Tier 3 — the hobby got serious"
-    parts: [t3-rtx-3060-12, t3-rtx-3090, t3-rtx-a4000, t3-r740, t3-nvme-2tb, t3-ups-1500]
+    parts: [t3-rtx-3060-12, t3-rtx-3090, t3-rtx-a4000, t3-r740, t3-rdimm-32, t3-nvme-2tb, t3-ups-1500]
 
 parts:
   # ---------- Tier 1 ----------
@@ -78,8 +78,8 @@ parts:
     about: 160
   t2-ram-ddr4-32:
     name: "32 GB DDR4-3200 SO-DIMM"
-    note: "Takes a 16 GB mini PC to 32–48 GB for a bigger model or more containers. Memory prices are volatile right now — see [Buying used](/tiers/#buying-used)."
-    about: 60
+    note: "Takes a 16 GB mini PC to 32–48 GB for a bigger model or more containers. Memory prices have been climbing too fast for a fixed number to mean much — see [Buying used](/tiers/#buying-used)."
+    about: "check"
 
   # ---------- Tier 3 ----------
   t3-rtx-3060-12:
@@ -99,6 +99,10 @@ parts:
     note: "This is what I run, and it is not a typical home recommendation: a rack server, loud, hungry, and happiest in a basement or garage. It is where the lab notes come from."
     mine: true
     about: 1400
+  t3-rdimm-32:
+    name: "32 GB DDR4 RDIMM (server memory, PC4-2933Y or 2666V)"
+    note: "What an R740-class server takes. About $200–225 a stick in October 2026 — under $200, I'd buy. Registered ECC only; it won't work in a desktop or mini PC."
+    about: 210
   t3-nvme-2tb:
     name: "NVMe SSD, 2 TB, Gen4"
     note: "Buy new. Model storage: a model file loads from NVMe in seconds, from a hard drive in minutes."
