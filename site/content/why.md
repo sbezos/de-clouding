@@ -7,7 +7,7 @@ description: "Five short paragraphs. That's all the philosophy you'll find here.
 
 **Part of it is being given back.** Open-weight models — ones you can download and run on your own computer — are that capability, handed out. They are smaller than the hosted giants, but for everyday use they are already good, and they get better every few months.
 
-**The part that isn't given back is you.** When you use a hosted assistant, cloud drive, or smart speaker, the service keeps what you put in. Your questions, files, photos, and the rhythms of your home become the raw material for the next product, on terms the provider can change whenever it likes.
+**The part that isn't given back is you, and it isn't only about privacy.** When you use a hosted assistant, cloud drive, or smart speaker, the service keeps what you put in, and it decides what you can do with it: whether you can export it, move it, use it with another tool, or keep using it at all when the terms or the price change. Link your life to someone's cloud and you are working inside their rules. That goes for knowledge too: if the one assistant that understands your setup disappears, the understanding goes with it.
 
 **The inventor's version.** In my day job I tell inventors: if your dataset has value, protect it at all costs. AI is remarkable, but its value is unlocked by access to unique data — control the access and you control the space. A household is a dataset too. Your photos, your messages, the rhythm of your home: that is the unique data, and today it's handed over for free.
 
