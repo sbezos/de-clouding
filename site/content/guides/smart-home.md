@@ -3,7 +3,7 @@ title: "Smart home & voice"
 weight: 50
 eyebrow: "Guide 5"
 replaces: "Alexa, Google Home, SmartThings, a dozen vendor apps"
-description: "Keep the speakers and bulbs. Replace the brain."
+description: "De-cloud your smart home: keep the speakers and bulbs, replace the brain, and read your own electricity meter at home."
 moves: ["Data", "Compute", "Network"]
 ---
 
@@ -20,6 +20,15 @@ The usual worry is "do I have to throw out my smart speakers?" No:
 - Most **bulbs, plugs, sensors, and thermostats** work with Home Assistant directly, many of them with their cloud account turned off. Devices using Zigbee, Z-Wave, Thread/Matter, or plain Wi-Fi with local control are the ones to prefer when you buy new.
 - **Voice assistants** are the hard case. Home Assistant has its own voice pipeline that can run fully local (with its own inexpensive voice hardware, or any microphone), and it can use your local AI model to understand natural requests. If you want to keep using existing smart speakers, they can be linked to Home Assistant so the speaker becomes a microphone and the decisions happen at home — the vendor still hears the command, but your house's state and history stay yours.
 
+## Your electricity, read at home
+
+Whole-home energy monitors are a quiet cloud dependency. Clamps on the circuits in your breaker panel report every second, to the maker's servers, which then show you your own house. That second-by-second record says when you wake up, cook, shower and leave. There are two ways to bring it home:
+
+- **Buy one that works locally.** Some monitors offer a local connection or run open firmware out of the box. Home Assistant reads them directly and draws the energy dashboard itself, with history kept in your house.
+- **De-cloud the one you have.** Several popular monitors are built on the same ESP32 chip as hobby boards, and can run the open-source ESPHome firmware instead of the maker's. LTT Labs' [De-clouding smart home energy monitoring](https://www.lttlabs.com/articles/2026/11/16/de-clouding-smart-home-energy-monitoring) walks through it for an Emporia Vue 3, building on [digiblur's](https://digiblur.com/) work. It voids the warranty, and the monitor lives in your breaker panel: take it out, or have an electrician do it, and flash it on the bench, never in the panel.
+
+Your utility's smart meter is a third source. Most US utilities let you download your usage history (look for "Green Button"), which gives you a file you keep instead of a dashboard you visit.
+
 ## What you still rent
 
 Possibly nothing. If you keep vendor speakers, you keep that vendor's voice service for the listening part only. Some devices (certain thermostats, locks, robot vacuums) only work via their cloud — Home Assistant's device list tells you which before you buy.
@@ -33,6 +42,7 @@ Possibly nothing. If you keep vendor speakers, you keep that vendor's voice serv
 - **Fully local voice** is a pipeline: wake word (openWakeWord / microWakeWord on the satellite), speech-to-text (Whisper, or the lighter Speech-to-Phrase), intent handling, optional LLM for natural language (the Ollama integration), text-to-speech (Piper). A mini PC runs the small variants; a GPU makes Whisper instant.
 - **Keeping Alexa or Google as the microphone**: Home Assistant Cloud (Nabu Casa, a few dollars a month, funds the project) is the easy bridge. The self-hosted alternative needs an internet-reachable endpoint; do it through a small rented relay box so nothing at home is exposed, not by opening ports.
 - **Network**: put IoT devices on their own VLAN with no route to your computers; run an mDNS reflector so discovery works across it; give fixed addresses to anything you'll automate.
+- **Energy, locally**: Home Assistant's Energy dashboard takes any sensor that reports kWh. Devices with a local API (Shelly's EM line, for example) have native integrations that never touch a cloud. ESPHome on a reflashed Emporia Vue uses the community `emporia-vue-local` external component, which exposes each circuit as its own sensor. Back up the stock firmware with `esptool` before you flash, so you can go back. Low-voltage work on the bench only. The clamps and the panel are mains-voltage territory.
 - **Backups**: Home Assistant makes its own backup archives on a schedule — send them to the box or NAS so the backup kit sweeps them off-site.
 {{% /deep %}}
 
@@ -64,12 +74,12 @@ Find the stick's stable path with `ls /dev/serial/by-id/`; a minimal `mosquitto/
 {{< tiers
   t0="Install Home Assistant on an old laptop or in a virtual machine on your computer to try it. Start turning off cloud features on devices that support local control."
   t1="This is tier 1's natural home: a Raspberry Pi or mini PC running Home Assistant 24/7, plus a $30 Zigbee/Z-Wave USB stick to free devices from their hubs."
-  t2="Add fully local voice (Home Assistant's voice hardware or satellites) and let your local AI model handle natural-language requests."
+  t2="Add fully local voice (Home Assistant's voice hardware or satellites), let your local AI model handle natural-language requests, and read your energy monitor at home."
   t3="Everything local, including camera-based presence and a conversational assistant that knows the house."
 >}}
 
 {{< prompt >}}
-I want my smart home to work without depending on [Alexa / Google Home / vendor apps]. Devices I have: [list bulbs, plugs, thermostats, speakers, locks, cameras, hubs — brands and models if you know them]. Budget tier: [0 / 1 / 2 / 3 — see de-clouding.com/tiers]. Comfort: [none / some / fluent]. I [want / don't need] to keep using voice commands.
+I want my smart home to work without depending on [Alexa / Google Home / vendor apps]. Devices I have: [list bulbs, plugs, thermostats, energy monitors, speakers, locks, cameras, hubs — brands and models if you know them]. Budget tier: [0 / 1 / 2 / 3 — see de-clouding.com/tiers]. Comfort: [none / some / fluent]. I [want / don't need] to keep using voice commands.
 
 Tell me which of my devices can run locally with Home Assistant, which need their cloud, and which I might eventually replace. Recommend hardware to run Home Assistant on at my tier (check current availability and prices). Then set it up with me one step at a time, waiting for confirmation at each step: install, add devices one by one, recreate my most-used automations, and only then turn off the old hub's control so I have a fallback the whole way. Never expose Home Assistant directly to the internet; if I need remote access, use a VPN-style tool. Tell me before anything hard to undo, including factory-resetting any device.
 {{< /prompt >}}

@@ -3,7 +3,7 @@ title: "Passwords & notes"
 weight: 40
 eyebrow: "Guide 4"
 replaces: "LastPass, 1Password cloud, Evernote, Notion, Apple/Google Notes"
-description: "Small data, high value. An afternoon's work."
+description: "De-cloud your passwords and notes: small data, high value, and an afternoon's work to own outright."
 moves: ["Data", "Compute"]
 ---
 

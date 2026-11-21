@@ -19,4 +19,5 @@
   {{ end }}
 </article>
 {{ end }}
+{{ define "head" }}{{ with .Params.term }}<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "DefinedTerm" "name" . "description" $.Params.termDefinition "url" $.Permalink "inDefinedTermSet" (dict "@type" "DefinedTermSet" "name" site.Title "url" site.BaseURL) | jsonify | safeJS }}</script>{{ end }}{{ end }}
 {{ define "scripts" }}{{ with .Params.script }}{{ $js := resources.Get . | minify | fingerprint }}<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>{{ end }}{{ end }}
