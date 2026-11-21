@@ -31,6 +31,10 @@ Use the powerful hosted assistants for what they're great at: designing and writ
 
 Most of what a home needs already exists as well-maintained open-source software with thousands of users: photo libraries, media servers, password managers, home automation. Use those, and pin the versions you run. Write your own code only for the parts that are truly yours: the glue between your apps, a workflow nobody else has, a dashboard for your house. That keeps the custom part small enough for any helper to understand.
 
+## A coding helper that runs at home
+
+The same idea, one step further: a coding assistant that runs on your own hardware. Open-source agent tools (Aider, Cline, OpenHands) can drive an open-weight coding model on your box to read your wiki, fix a script, or add a small feature, with no account and nothing leaving the house. They're slower than the best hosted agents and make more mistakes on big jobs. But if the hosted service changes its terms or goes away, your house keeps a helper who can read the notes and keep things running.
+
 ## Keep the robot in a sandbox
 
 If you let an AI agent write and run code on its own, give it a room of its own. A separate virtual machine, with no passwords to anything else, an internet connection that reaches only a short allowlist (the AI service and the package sites), and a way to hand back its work that you review before it goes anywhere. It can't break what it can't reach.
@@ -49,6 +53,8 @@ Possibly a hosted AI for the heavy lifting, used on your terms, by the job. The 
 - **Build-time only**: a hosted agent can build things, but nothing it builds may call a hosted AI to run. Runtime AI goes to your local model server (Ollama, llama.cpp). A batch build agent runs jobs from written briefs (goal, allowed paths, the acceptance command, a budget cap) and returns a git bundle that you review and merge.
 - **The sandbox**: a full VM rather than a container for an unattended agent. It runs as a user without sudo, behind an egress proxy that allows only the AI API, PyPI, npm and GitHub, with no LAN access at all, and holds a single API key with a spending cap. Results come out only as a bundle that your main machine pulls.
 - **Local fallback, honestly**: open-weight coding models plus an open-source agent harness (Aider, OpenHands, Continue, or similar) can read the same wiki and work the same briefs. Today they're slower and make more mistakes than the best hosted agents on big multi-file changes, and they're fine for small, well-specified ones. With good written context and a strict test suite, the gap is smaller than you'd expect, and it closes every few months.
+- **What runs where, as of November 2026**: on a 24 GB graphics card, a 30–35B mixture-of-experts coding model (Qwen 3.6 35B-A3B is the common pick) runs fast; on 16 GB, the same model works with its experts in system RAM (`--cpu-moe`); with hundreds of gigabytes of RAM, the 400B-plus coding models run slowly but well. **Aider** (terminal, commits each change to git) is the most dependable with local models. **Cline** works inside VS Code and asks before each action. **OpenHands** runs a full agent in a container. Expect local models to lose the thread past about 32K tokens of context, which is one more reason to keep pages short and briefs specific.
+- **Make the test suite the referee**: a local agent's work goes through the same acceptance command as any other helper's. Run it in the same sandbox, and review the diff before merging.
 - **Maintained over bespoke**: before writing anything, check for an actively maintained project (recent releases, open issue tracker, more than one maintainer). Pin image tags and package versions; never run `:latest` unattended. Upgrade on purpose, one thing at a time, with the trap list open.
 {{% /deep %}}
 
@@ -85,7 +91,7 @@ updated: 2026-11-01
 {{< tiers
   t0="A notes file per machine and app in a folder you already back up, and one line in a decisions file every time you change something."
   t1="The wiki in git on the small box, and every assistant session starting from its index."
-  t2="Acceptance tests for every script you wrote, version pins everywhere, and a local model that can read the wiki."
+  t2="Acceptance tests for every script you wrote, version pins everywhere, and a local model that can read the wiki — and a local coding agent for the small fixes."
   t3="A sandboxed build VM with an egress allowlist, a budget-capped API key, and written briefs that any agent, hosted or local, can run."
 >}}
 

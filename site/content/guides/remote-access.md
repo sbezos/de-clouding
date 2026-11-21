@@ -22,6 +22,12 @@ Instead, your devices join a **private mesh**: your phone, laptop, and home box 
 
 Once you have more than a handful of smart devices and cameras, put them on a **separate network segment** with no path to the internet or to your computers. Most decent home routers can do this ("guest network" or "VLAN"). It's the single biggest security improvement available to a home, and it's what makes it safe to own a $20 camera.
 
+## Let a local model read the logs
+
+Your router, Wi-Fi and DNS filter write down everything that happens on your network. Nobody reads those logs, because there are thousands of lines a day. A local AI model will. Every night it reads the day's logs on your own box and leaves you a short morning note in plain English: a device you've never seen joined the Wi-Fi; the new camera tried to reach a server overseas 4,000 times; something knocked on the front door all night and the firewall turned it away; the Wi-Fi dropped every evening at seven.
+
+Two rules make this safe. The logs never leave the house: they describe everything your family does online. And the model **reports and never acts**: it doesn't change firewall rules or block devices. You read the note and decide.
+
 ## What you still rent
 
 With Tailscale: a free account for the introduction service, carrying no data of yours. With WireGuard on your own router: nothing.
@@ -35,6 +41,9 @@ With Tailscale: a free account for the introduction service, carrying no data of
 - **VLANs**: an IoT network with internet but no path to your computers; a camera network with neither; firewall rules that allow connections *from* your main network *into* those and only replies back. Most prosumer routers do this; most ISP routers don't.
 - **DNS**: AdGuard Home or Pi-hole on the box as the network's DNS, with encrypted (DoH/DoT) upstreams; per-device schedules; and a router rule redirecting all port-53 traffic to it, so devices with hardcoded DNS can't bypass the filter.
 - **Switch off**: UPnP (devices punching their own holes), WPS, and any "DMZ host" setting. Check your router's admin page isn't reachable from the WAN side.
+- **The log digest**: most routers can send their logs to another machine over syslog. Collect them on the box (rsyslog or Vector), and add the DNS filter's query log, the best single record of which device is calling what. Don't feed raw lines to the model. A small script counts them first (new devices, top destinations per device, blocked connections by source, Wi-Fi disconnects by hour) and hands the model one page of numbers plus a list of the devices you know. A 12–14B model writes a good digest from that.
+- **Keep it honest**: give the model the numbers and ask for a ranked list of what changed since yesterday, with the evidence line for each item, so you can check its claims. Send the note through your own notification server ([alerts that stay home](/guides/locks-and-power/)), timed for the morning, not 3 a.m.
+- **Retention**: logs are a record of your household. Keep 30 days on the box, outside any cloud, and exclude them from off-site backups unless you encrypt them.
 {{% /deep %}}
 
 
@@ -55,13 +64,25 @@ Tag the box with `sudo tailscale up --advertise-tags=tag:box`, and tag a friend'
 
 **Plain WireGuard on the box**, if you'd rather have no coordination service: `sudo apt install wireguard`, `wg genkey | tee server.key | wg pubkey > server.pub`, a `/etc/wireguard/wg0.conf` with the server key and one `[Peer]` per device, `systemctl enable --now wg-quick@wg0`, and forward exactly one UDP port on the router to the box. The phone side is a QR code.
 
+**Receive your router's logs on the box** (rsyslog; then set the router's remote syslog server to the box, UDP 514):
+
+```
+# /etc/rsyslog.d/10-router.conf
+module(load="imudp")
+template(name="routerLog" type="string" string="/srv/logs/router/%$YEAR%-%$MONTH%-%$DAY%.log")
+ruleset(name="router") { action(type="omfile" dynaFile="routerLog") stop }
+input(type="imudp" port="514" ruleset="router")
+```
+
+`sudo systemctl restart rsyslog`, then allow UDP 514 only from the router's address. A nightly timer runs your summary script over yesterday's file and passes the one-page result to `ollama run` with your digest instructions.
+
 **Make the DNS filter stick**: on the router, a NAT rule redirecting all LAN traffic to destination port 53 → the box; devices with hardcoded DNS (TVs, some IoT) end up filtered anyway. Block outbound 853 (DNS-over-TLS) from the IoT VLAN for the same reason.
 {{% /deep %}}
 
 {{< tiers
   t0="Tailscale on every device you own. Ten minutes. This alone lets you reach a laptop at home from anywhere, privately."
   t1="The small box joins the mesh and becomes the always-on door to everything else running on it."
-  t2="A router that can do network segments; cameras and gadgets isolated; WireGuard on the router if you want zero third parties."
+  t2="A router that can do network segments; cameras and gadgets isolated; WireGuard on the router if you want zero third parties; a local model reading the logs and leaving you a morning note."
   t3="Managed switches, several segments, and perhaps a small rented machine as a public front door for the one or two things you choose to share with the world."
 >}}
 

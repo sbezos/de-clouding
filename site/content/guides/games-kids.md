@@ -44,6 +44,16 @@ Every console maker offers parental controls — and the log of when and what yo
 - Filtering with a free DNS filter on your own box (AdGuard Home or Pi-hole) — see the [network guide](/guides/remote-access/).
 - The conversation. Robux, V-Bucks and battle passes are *designed*; a ten-year-old who knows what a “daily reward” is for has a defence no filter provides. You can’t self-host Fortnite. You can raise someone who understands it.
 
+## 5. Give them a world of their own
+
+The best thing a home network can give a kid isn't a copy of something they already use. It's a place that is theirs, that only the family can open, and that has no store in it.
+
+- **A family website, home-only.** A place where they write stories, post drawings and photos of what they built, and read each other's work, reachable only from devices in your house or on your private mesh. No accounts, no ads, no comments from strangers. If a post is good enough to share with the world, publishing it is a separate step you take together.
+- **A writing helper with house rules.** A local AI model can coach a young writer: asking questions, offering two or three ideas, pointing out what's good in their own work. Decide the rules before they meet it, because it talks with your child when you're not in the room. It coaches and never writes the whole thing. It answers at their age, and in their language. It never asks for full names, schools or addresses. It sends anything worrying to a grown-up. Tell your kids that you can read what they asked it.
+- **A world they build.** Text-adventure worlds (MUDs) are having a quiet comeback, and they make wonderful family projects: kids write the rooms and characters, a local model can give the characters voices, and everyone plays in a browser at home. Friends can visit through a mesh invite.
+- **Their own start button.** A game-server panel can give an older kid a start and stop button for the family Minecraft or Terraria server, without handing over the keys to the box.
+- **A library that works offline.** Kiwix serves Wikipedia and other reference collections from the box, for homework with no feed, no ads and no rabbit holes.
+
 ## What you still rent
 
 Online play on Nintendo, Xbox and PlayStation networks needs their subscription; local and same-couch multiplayer doesn’t. The service-games stay service-games. Everything else — the library, the world, the rules — can be yours.
@@ -60,6 +70,11 @@ Online play on Nintendo, Xbox and PlayStation networks needs their subscription;
 - **Streaming your own PC**: Sunshine uses the PC's hardware encoder (NVENC, QuickSync, AMF); Moonlight runs on Apple TV, Android TV, Fire TV, Steam Deck, a Pi or an old laptop. Wire the TV end with Ethernet for latency.
 - **Rules at the network edge**: AdGuard Home client schedules or your router's per-device schedules for bedtime; vendor family tools (Microsoft Family Safety, PlayStation Family, Nintendo's parental-controls app) for spending caps only — those live in their clouds, so give them the one job.
 - **Spending**: buy Robux and V-Bucks as gift cards instead of saving a card on the account; enable purchase PINs where offered.
+- **Home-only sites**: bind the kids' site, wiki or game to the box's LAN and mesh addresses only, give it a house name in your DNS filter (for example `kids.home`), and never forward a port to it. A static site generator (Hugo) with a simple editor in front, or a self-hosted wiki (BookStack, Wiki.js, DokuWiki), all work. Keep photos EXIF-stripped even at home, so a post never carries a location when it's shared later.
+- **The AI helper**: a 12B-class instruction model at 4-bit fits a 16 GB graphics card and answers a kid fast enough. Put the rules in the model's system prompt, and give it each child's age so the tone fits. Log every question and answer to a file a parent can read, and tell the kids so. Keep their private drafts and photos out of the model's reach unless they choose to share them.
+- **MUDs**: Evennia is a maintained Python framework for text worlds with a built-in web client, so nobody installs anything. Builders write rooms in plain commands, and a small script can hand character dialogue to your local model.
+- **Panels**: Pelican (the maintained successor to Pterodactyl) runs each game server in its own container and gives each user only the buttons you allow: start, stop, console, never the box itself.
+- **Offline reference**: `kiwix-serve` hosts downloaded `.zim` collections (Wikipedia, Wiktionary, Project Gutenberg, kid-friendly selections) from one container. The full English Wikipedia with images is around 100 GB; text-only and topic-sized selections are much smaller.
 {{% /deep %}}
 
 
@@ -87,12 +102,12 @@ Bedrock players then join at `box` port 19132; Floodgate lets them in without a 
 {{< tiers
   t0="Buy the five games they actually play, DRM-free or on cartridge; let the rotating catalogs lapse; set spending limits; have the battle-pass conversation. Zero hardware."
   t1="A Minecraft or Luanti server on the small box, friends-only. A DNS filter and router schedules for bedtime."
-  t2="Several game servers (Terraria, Valheim, Stardew co-op all have free dedicated servers), the kids’ movies on Jellyfin, controls at the network level."
-  t3="One gaming PC streamed to every screen with Sunshine and Moonlight — your own cloud gaming, no monthly fee."
+  t2="Several game servers (Terraria, Valheim, Stardew co-op all have free dedicated servers), a home-only family site and offline Wikipedia, the kids’ movies on Jellyfin, controls at the network level."
+  t3="One gaming PC streamed to every screen with Sunshine and Moonlight — your own cloud gaming, no monthly fee — and a local AI writing helper with house rules you agreed on first."
 >}}
 
 {{< prompt title="Hand it to Claude (parent edition)" >}}
 I want to reduce how much of my kids' gaming depends on subscriptions and cloud services, without cutting them off from their friends. Kids: [ages]. Devices: [consoles, tablets, PCs, with models if known]. What they actually play: [games]. What we pay today: [subscriptions, hosted-world plans, in-game allowance]. Budget tier: [0 / 1 / 2 / 3 — see de-clouding.com/tiers]. Comfort with computers: [none / some / fluent].
 
-Please: (1) sort what they play into "can be owned outright", "can be hosted at home", and "is a service we can only set rules for", and explain each in a sentence I could repeat to a ten-year-old; (2) for anything we can host at home — a Minecraft or similar server — walk me through setting it up one step at a time, waiting for my confirmation, friends-only with an allow-list, and explain the safe options for letting friends join from their houses before I pick one; (3) help me set spending limits in each vendor's parental controls and move bedtime and filtering rules onto my own router or a DNS filter at home; (4) total up what this saves per year. Keep their existing friendships and the games their friends are on intact; do not suggest unlicensed copies of anything; tell me before anything hard to undo. Check current documentation before giving commands or settings.
+Please: (1) sort what they play into "can be owned outright", "can be hosted at home", and "is a service we can only set rules for", and explain each in a sentence I could repeat to a ten-year-old; (2) for anything we can host at home — a Minecraft or similar server — walk me through setting it up one step at a time, waiting for my confirmation, friends-only with an allow-list, and explain the safe options for letting friends join from their houses before I pick one; (3) help me set spending limits in each vendor's parental controls and move bedtime and filtering rules onto my own router or a DNS filter at home; (4) total up what this saves per year; (5) if I'm interested, suggest a home-only project for them (a family website, a text-adventure world, offline Wikipedia, or a writing helper running on our own hardware) and help me write the house rules for any AI helper before they use it. Keep their existing friendships and the games their friends are on intact; do not suggest unlicensed copies of anything; tell me before anything hard to undo. Check current documentation before giving commands or settings.
 {{< /prompt >}}
